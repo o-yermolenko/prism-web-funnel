@@ -68,13 +68,13 @@ export default function GenderScreen({ screen }: GenderScreenProps) {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="flex flex-col sm:flex-row gap-6 justify-center"
+          className="flex flex-row gap-4 sm:gap-6 justify-center px-4 sm:px-0"
         >
           {screen.options?.map((option, index) => (
             <button
               key={option.id}
               onClick={() => handleSelect(option.id)}
-              className={`group relative w-full sm:w-64 h-72 border transition-all duration-500 ${
+              className={`group relative flex-1 max-w-[160px] sm:max-w-[256px] h-56 sm:h-72 border transition-all duration-500 ${
                 selected === option.id
                   ? 'border-prism-electric-blue bg-prism-electric-blue/5'
                   : 'border-prism-muted/30 hover:border-prism-muted-light bg-transparent'
@@ -82,7 +82,7 @@ export default function GenderScreen({ screen }: GenderScreenProps) {
             >
               {/* Silhouette placeholder */}
               <div className="absolute inset-0 flex items-center justify-center">
-                <div className={`w-24 h-40 rounded-full bg-gradient-to-b transition-all duration-500 ${
+                <div className={`w-16 h-28 sm:w-24 sm:h-40 rounded-full bg-gradient-to-b transition-all duration-500 ${
                   selected === option.id
                     ? 'from-prism-electric-blue/20 to-prism-electric-blue/5'
                     : 'from-prism-muted/10 to-transparent group-hover:from-prism-muted/20'

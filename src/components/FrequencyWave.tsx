@@ -1,54 +1,105 @@
 'use client';
 
 import { useFunnelStore } from '@/lib/store';
-import { useMemo } from 'react';
+import { useEffect, useState, useRef } from 'react';
 
-export default function FrequencyWave() {
-  const { getProgress } = useFunnelStore();
+interface FrequencyWaveProps {
+  position?: 'top' | 'bottom';
+}
+
+export default function FrequencyWave({ position = 'top' }: FrequencyWaveProps) {
+  const { getProgress, currentScreen } = useFunnelStore();
   const progress = getProgress();
+  const [time, setTime] = useState(0);
+  const [transitionAmplitude, setTransitionAmplitude] = useState(1);
+  const prevScreenRef = useRef(currentScreen);
   
-  // Generate wave bars with varying heights based on progress
-  const bars = useMemo(() => {
-    const count = 60;
-    return Array.from({ length: count }, (_, i) => {
-      // Create a wave pattern
-      const position = i / count;
-      const waveIntensity = Math.sin(position * Math.PI * 4 + Date.now() / 1000) * 0.3 + 0.7;
-      const progressFactor = position <= progress / 100 ? 1 : 0.2;
+  // Slow, deliberate animation
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTime(t => t + 0.02);
+    }, 16);
+    return () => clearInterval(interval);
+  }, []);
+  
+  // Gentle "settling" transition when screen changes
+  useEffect(() => {
+    if (currentScreen !== prevScreenRef.current) {
+      setTransitionAmplitude(1.4); // Gentle surge
+      prevScreenRef.current = currentScreen;
       
-      return {
-        height: waveIntensity * progressFactor,
-        active: position <= progress / 100,
-        index: i,
-      };
-    });
-  }, [progress]);
+      // Settle back slowly
+      const timeout = setTimeout(() => {
+        setTransitionAmplitude(1);
+      }, 500);
+      
+      return () => clearTimeout(timeout);
+    }
+  }, [currentScreen]);
+  
+  const generateWavePath = (width: number, height: number) => {
+    const points: string[] = [];
+    const segments = 80;
+    const centerY = height / 2;
+    const progressX = (progress / 100) * width;
+    
+    for (let i = 0; i <= segments; i++) {
+      const x = (i / segments) * width;
+      
+      // Base amplitude with transition effect
+      const baseAmplitude = 6 * transitionAmplitude;
+      
+      // Amplitude fades after progress point
+      const amplitude = x <= progressX 
+        ? baseAmplitude 
+        : baseAmplitude * 0.15;
+      
+      const y = centerY + Math.sin((x * 0.02) + time) * amplitude;
+      
+      points.push(i === 0 ? `M ${x} ${y}` : `L ${x} ${y}`);
+    }
+    
+    return points.join(' ');
+  };
 
+  const width = 600;
+  const height = 32;
+  
   return (
-    <div className="w-full h-full flex items-end justify-center gap-[2px] px-4">
-      {bars.map((bar) => (
-        <div
-          key={bar.index}
-          className={`w-[2px] rounded-full transition-all duration-500 ease-out ${
-            bar.active 
-              ? 'bg-gradient-to-t from-prism-electric-blue/30 to-prism-electric-blue' 
-              : 'bg-prism-muted/20'
-          }`}
-          style={{
-            height: `${bar.height * 32}px`,
-            animationDelay: `${bar.index * 50}ms`,
-          }}
+    <div className="w-full h-8 relative overflow-hidden">
+      <svg 
+        viewBox={`0 0 ${width} ${height}`} 
+        className="w-full h-full" 
+        preserveAspectRatio="none"
+      >
+        <defs>
+          <linearGradient id="waveGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="#0066ff" stopOpacity="0.8" />
+            <stop offset={`${progress}%`} stopColor="#0066ff" stopOpacity="1" />
+            <stop offset={`${Math.min(progress + 5, 100)}%`} stopColor="#0066ff" stopOpacity="0.15" />
+            <stop offset="100%" stopColor="#0066ff" stopOpacity="0.08" />
+          </linearGradient>
+          
+          <filter id="glow">
+            <feGaussianBlur stdDeviation="1.5" result="blur"/>
+            <feMerge>
+              <feMergeNode in="blur"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
+        </defs>
+        
+        {/* Single clean wave */}
+        <path
+          d={generateWavePath(width, height)}
+          fill="none"
+          stroke="url(#waveGradient)"
+          strokeWidth={2}
+          strokeLinecap="round"
+          filter="url(#glow)"
+          className="transition-all duration-500 ease-out"
         />
-      ))}
-      
-      {/* Subtle glow effect */}
-      <div 
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background: `radial-gradient(ellipse 50% 100% at ${progress}% 100%, rgba(0, 102, 255, 0.1) 0%, transparent 70%)`,
-        }}
-      />
+      </svg>
     </div>
   );
 }
-

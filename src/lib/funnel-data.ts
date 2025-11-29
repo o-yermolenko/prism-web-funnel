@@ -13,7 +13,7 @@ export const FUNNEL_SCREENS: FunnelScreen[] = [
     purpose: 'Entry (Gender)',
     header: 'Your Mind. Finally Unfiltered.',
     badge: '3-MINUTE QUIZ',
-    subheader: 'Get your personalized thinking space',
+    subheader: 'Discover why you feel exhausting to be around',
     options: [
       { id: 'male', text: 'Male' },
       { id: 'female', text: 'Female' },
@@ -49,7 +49,7 @@ export const FUNNEL_SCREENS: FunnelScreen[] = [
     purpose: 'Social proof + hook',
     header: 'Millions of people feel the same exhaustion.',
     subheader: 'The exhaustion of being too much for others to understand.',
-    showProgress: false,
+    showProgress: true,
     showBackButton: true,
   },
 
@@ -137,7 +137,7 @@ export const FUNNEL_SCREENS: FunnelScreen[] = [
       label: 'report chronic loneliness',
       source: 'Journal of Individual Differences, 2019',
     },
-    showProgress: false,
+    showProgress: true,
     showBackButton: true,
   },
 
@@ -212,7 +212,7 @@ export const FUNNEL_SCREENS: FunnelScreen[] = [
       ],
       warning: 'This pattern affects an estimated 15% of the population. Without intervention, it typically intensifies with age.',
     },
-    showProgress: false,
+    showProgress: true,
     showBackButton: true,
   },
 
@@ -264,7 +264,7 @@ export const FUNNEL_SCREENS: FunnelScreen[] = [
     purpose: 'Transition from problem to solution',
     header: 'You\'ve spent your whole life translating yourself.',
     subheader: 'What if you didn\'t have to?',
-    showProgress: false,
+    showProgress: true,
     showBackButton: true,
   },
 
@@ -313,7 +313,7 @@ export const FUNNEL_SCREENS: FunnelScreen[] = [
     emotionalState: 'TRANSFORMED',
     purpose: 'Show AI insight based on selection',
     header: '',
-    showProgress: false,
+    showProgress: true,
     showBackButton: true,
   },
 
@@ -324,7 +324,7 @@ export const FUNNEL_SCREENS: FunnelScreen[] = [
     purpose: 'Future pace the benefit',
     header: 'That was one thought.',
     subheader: 'Imagine doing this every day. Whenever you need it. Without judgment.',
-    showProgress: false,
+    showProgress: true,
     showBackButton: true,
   },
 
