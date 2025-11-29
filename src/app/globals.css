@@ -2,27 +2,413 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ============================================
+   PRISM DESIGN SYSTEM
+   ============================================ */
+
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  /* Colors - PRISM Palette */
+  --prism-black: #000000;
+  --prism-white: #ffffff;
+  --prism-electric-blue: #0066ff;
+  --prism-muted: #666666;
+  --prism-muted-light: #888888;
+  
+  /* Prism dispersion colors - for subtle rainbow effects */
+  --prism-red: #ff0040;
+  --prism-orange: #ff6b00;
+  --prism-yellow: #ffd000;
+  --prism-green: #00ff88;
+  --prism-cyan: #00d4ff;
+  --prism-violet: #8800ff;
+  
+  /* Typography - System font stacks */
+  --font-raw: ui-monospace, 'SF Mono', 'Cascadia Code', 'Source Code Pro', 'Menlo', 'Consolas', monospace;
+  --font-refined: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', 'Segoe UI', system-ui, sans-serif;
+  
+  /* Spacing - Generous, intentional */
+  --space-void: 8rem;
+  --space-breath: 4rem;
+  --space-pause: 2rem;
+  --space-gap: 1rem;
+  
+  /* Animation timing - Slow and deliberate */
+  --timing-slow: 500ms;
+  --timing-medium: 400ms;
+  --timing-default: 300ms;
+  --timing-pause: 800ms;
+  
+  /* Easing - Calm, intentional movement */
+  --ease-prism: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-fade: cubic-bezier(0.0, 0, 0.2, 1);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+/* ============================================
+   BASE STYLES
+   ============================================ */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
+  background-color: var(--prism-black);
+  color: var(--prism-white);
+  font-family: var(--font-refined);
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
 }
+
+/* ============================================
+   TYPOGRAPHY SYSTEM
+   ============================================ */
+
+/* Raw input typography - monospace, unfiltered */
+.text-raw {
+  font-family: var(--font-raw);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 1.6;
+}
+
+/* Refined output typography - clean sans-serif */
+.text-refined {
+  font-family: var(--font-refined);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.5;
+}
+
+/* Display text - for headlines */
+.text-display {
+  font-family: var(--font-refined);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+
+/* Muted text - for timestamps, secondary info */
+.text-muted {
+  color: var(--prism-muted);
+  font-size: 0.875rem;
+  letter-spacing: 0;
+}
+
+/* ============================================
+   INPUT STYLES
+   ============================================ */
+
+/* Large input field - the void to fill */
+.input-void {
+  background: transparent;
+  border: none;
+  color: var(--prism-white);
+  font-family: var(--font-raw);
+  font-size: 1.25rem;
+  line-height: 1.6;
+  outline: none;
+  padding: 0;
+  width: 100%;
+  resize: none;
+}
+
+.input-void::placeholder {
+  color: var(--prism-muted);
+  opacity: 0.6;
+}
+
+.input-void:focus::placeholder {
+  opacity: 0.3;
+  transition: opacity var(--timing-default) var(--ease-fade);
+}
+
+/* ============================================
+   ANIMATION UTILITIES
+   ============================================ */
+
+/* Slow, deliberate fade in */
+@keyframes prism-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-fade-in {
+  animation: prism-fade-in var(--timing-default) var(--ease-fade) forwards;
+}
+
+/* Slow, deliberate fade out */
+@keyframes prism-fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.animate-fade-out {
+  animation: prism-fade-out var(--timing-default) var(--ease-fade) forwards;
+}
+
+/* Gentle slide up - for AI responses */
+@keyframes prism-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-up {
+  animation: prism-slide-up var(--timing-slow) var(--ease-prism) forwards;
+}
+
+/* Subtle pulse - for recording state */
+@keyframes prism-pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.animate-pulse-slow {
+  animation: prism-pulse 2s var(--ease-prism) infinite;
+}
+
+/* Frequency wave - for progress indicator */
+@keyframes prism-wave {
+  0% {
+    transform: scaleY(0.3);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+  100% {
+    transform: scaleY(0.3);
+  }
+}
+
+.animate-wave {
+  animation: prism-wave 1.5s var(--ease-prism) infinite;
+}
+
+/* Prism dispersion effect - subtle rainbow glow */
+@keyframes prism-dispersion {
+  0% {
+    filter: hue-rotate(0deg);
+  }
+  100% {
+    filter: hue-rotate(360deg);
+  }
+}
+
+.animate-dispersion {
+  animation: prism-dispersion 8s linear infinite;
+}
+
+/* ============================================
+   COMPONENT UTILITIES
+   ============================================ */
+
+/* The void - maximum emptiness, space to breathe */
+.void {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-breath);
+}
+
+/* Prism glow - subtle electric blue aura */
+.glow-prism {
+  box-shadow: 0 0 40px rgba(0, 102, 255, 0.15);
+}
+
+/* Prism dispersion glow - very subtle rainbow edge */
+.glow-dispersion {
+  position: relative;
+}
+
+.glow-dispersion::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  background: linear-gradient(
+    90deg,
+    var(--prism-red),
+    var(--prism-orange),
+    var(--prism-yellow),
+    var(--prism-green),
+    var(--prism-cyan),
+    var(--prism-electric-blue),
+    var(--prism-violet)
+  );
+  opacity: 0.15;
+  border-radius: inherit;
+  z-index: -1;
+  filter: blur(8px);
+}
+
+/* Cursor blink - for text input state */
+@keyframes prism-blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+.cursor-blink {
+  animation: prism-blink 1s step-end infinite;
+}
+
+/* ============================================
+   BUTTON STYLES
+   ============================================ */
+
+/* Primary CTA - minimal, sharp */
+.btn-primary {
+  background: var(--prism-white);
+  color: var(--prism-black);
+  border: none;
+  padding: 1rem 2rem;
+  font-family: var(--font-refined);
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--timing-default) var(--ease-prism);
+  letter-spacing: -0.01em;
+}
+
+.btn-primary:hover {
+  background: var(--prism-electric-blue);
+  color: var(--prism-white);
+}
+
+/* Secondary button - text only */
+.btn-secondary {
+  background: transparent;
+  color: var(--prism-white);
+  border: 1px solid var(--prism-muted);
+  padding: 1rem 2rem;
+  font-family: var(--font-refined);
+  font-size: 1rem;
+  font-weight: 400;
+  cursor: pointer;
+  transition: all var(--timing-default) var(--ease-prism);
+  letter-spacing: -0.01em;
+}
+
+.btn-secondary:hover {
+  border-color: var(--prism-white);
+}
+
+/* Text button - minimal */
+.btn-text {
+  background: none;
+  border: none;
+  color: var(--prism-muted-light);
+  cursor: pointer;
+  font-family: var(--font-refined);
+  font-size: 0.875rem;
+  padding: 0.5rem 1rem;
+  transition: color var(--timing-default) var(--ease-prism);
+}
+
+.btn-text:hover {
+  color: var(--prism-white);
+}
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+
+/* Generous whitespace */
+.space-void {
+  padding: var(--space-void);
+}
+
+.space-breath {
+  padding: var(--space-breath);
+}
+
+.space-pause {
+  padding: var(--space-pause);
+}
+
+/* High contrast border */
+.border-sharp {
+  border: 1px solid var(--prism-white);
+}
+
+.border-muted {
+  border: 1px solid var(--prism-muted);
+}
+
+/* Accent color utility */
+.accent-electric {
+  color: var(--prism-electric-blue);
+}
+
+.bg-electric {
+  background-color: var(--prism-electric-blue);
+}
+
+/* ============================================
+   TAILWIND LAYER UTILITIES
+   ============================================ */
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
+  
+  /* Transition utilities with PRISM timing */
+  .transition-prism {
+    transition-duration: var(--timing-default);
+    transition-timing-function: var(--ease-prism);
+  }
+  
+  .transition-slow {
+    transition-duration: var(--timing-slow);
+    transition-timing-function: var(--ease-prism);
+  }
+  
+  /* Remove all browser default styles */
+  .reset-button {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+  }
+  
+  .reset-input {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    font: inherit;
+    color: inherit;
+    outline: none;
+  }
 }
-
