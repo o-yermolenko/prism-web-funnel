@@ -23,8 +23,8 @@
   --prism-violet: #8800ff;
   
   /* Typography - System font stacks */
-  --font-raw: ui-monospace, 'SF Mono', 'Cascadia Code', 'Source Code Pro', 'Menlo', 'Consolas', monospace;
-  --font-refined: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', 'Segoe UI', system-ui, sans-serif;
+  --font-raw: var(--font-mono), ui-monospace, 'SF Mono', monospace;
+  --font-refined: var(--font-inter), system-ui, -apple-system, sans-serif;
   
   /* Spacing - Generous, intentional */
   --space-void: 8rem;

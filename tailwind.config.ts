@@ -26,26 +26,12 @@ const config: Config = {
         },
       },
       fontFamily: {
+        // Main font
+        sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
         // Raw input - monospace for unfiltered thoughts
-        raw: [
-          'ui-monospace',
-          'SF Mono',
-          'Cascadia Code',
-          'Source Code Pro',
-          'Menlo',
-          'Consolas',
-          'monospace',
-        ],
+        raw: ['var(--font-mono)', 'ui-monospace', 'monospace'],
         // Refined output - clean sans-serif for processed insights
-        refined: [
-          '-apple-system',
-          'BlinkMacSystemFont',
-          'SF Pro Display',
-          'Inter',
-          'Segoe UI',
-          'system-ui',
-          'sans-serif',
-        ],
+        refined: ['var(--font-inter)', 'system-ui', 'sans-serif'],
       },
       spacing: {
         // PRISM spacing system - generous, intentional

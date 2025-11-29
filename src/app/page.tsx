@@ -1,15 +1,22 @@
-export default function Home() {
-  return (
-    <main className="void">
-      <div className="max-w-4xl text-center space-y-breath">
-        <h1 className="text-display text-7xl text-prism-white animate-fade-in text-balance">
-          Your mind. Finally unfiltered.
-        </h1>
-        <p className="font-refined text-2xl text-prism-muted-light animate-fade-in text-balance">
-          PRISM Design System Ready
-        </p>
-      </div>
-    </main>
-  )
-}
+'use client';
 
+import { useEffect } from 'react';
+import { useSearchParams } from 'next/navigation';
+import ScreenRenderer from '@/components/ScreenRenderer';
+import { useFunnelStore } from '@/lib/store';
+
+export default function Home() {
+  const searchParams = useSearchParams();
+  const resetFunnel = useFunnelStore((state) => state.resetFunnel);
+  
+  useEffect(() => {
+    // Reset funnel if ?reset=true is in URL
+    if (searchParams.get('reset') === 'true') {
+      resetFunnel();
+      // Remove reset param from URL
+      window.history.replaceState({}, '', '/');
+    }
+  }, [searchParams, resetFunnel]);
+  
+  return <ScreenRenderer />;
+}
