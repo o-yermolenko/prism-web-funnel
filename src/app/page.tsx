@@ -1,11 +1,11 @@
 'use client';
 
-import { useEffect } from 'react';
+import { Suspense, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import ScreenRenderer from '@/components/ScreenRenderer';
 import { useFunnelStore } from '@/lib/store';
 
-export default function Home() {
+function FunnelWithReset() {
   const searchParams = useSearchParams();
   const resetFunnel = useFunnelStore((state) => state.resetFunnel);
   
@@ -19,4 +19,12 @@ export default function Home() {
   }, [searchParams, resetFunnel]);
   
   return <ScreenRenderer />;
+}
+
+export default function Home() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-prism-black" />}>
+      <FunnelWithReset />
+    </Suspense>
+  );
 }

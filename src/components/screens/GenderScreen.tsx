@@ -70,7 +70,7 @@ export default function GenderScreen({ screen }: GenderScreenProps) {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="flex flex-col sm:flex-row gap-6 justify-center"
         >
-          {screen.options?.map((option, index) => (
+          {screen.options?.map((option) => (
             <button
               key={option.id}
               onClick={() => handleSelect(option.id)}
@@ -80,13 +80,79 @@ export default function GenderScreen({ screen }: GenderScreenProps) {
                   : 'border-prism-muted/30 hover:border-prism-muted-light bg-transparent'
               }`}
             >
-              {/* Silhouette placeholder */}
+              {/* Silhouette with haircut */}
               <div className="absolute inset-0 flex items-center justify-center">
-                <div className={`w-24 h-40 rounded-full bg-gradient-to-b transition-all duration-500 ${
-                  selected === option.id
-                    ? 'from-prism-electric-blue/20 to-prism-electric-blue/5'
-                    : 'from-prism-muted/10 to-transparent group-hover:from-prism-muted/20'
-                }`} />
+                <svg viewBox="0 0 100 140" className="w-24 h-40">
+                  <defs>
+                    <linearGradient id={`gradient-${option.id}`} x1="0%" y1="0%" x2="0%" y2="100%">
+                      <stop offset="0%" stopColor={selected === option.id ? "#0066ff" : "#ffffff"} stopOpacity={selected === option.id ? 0.2 : 0.1} />
+                      <stop offset="100%" stopColor={selected === option.id ? "#0066ff" : "#ffffff"} stopOpacity={selected === option.id ? 0.05 : 0} />
+                    </linearGradient>
+                  </defs>
+                  
+                  {/* Male haircut - short cropped on top */}
+                  {option.id === 'male' && (
+                    <path
+                      d="M35 42 C35 30, 42 24, 50 24 C58 24, 65 30, 65 42 C65 36, 58 30, 50 30 C42 30, 35 36, 35 42"
+                      fill={`url(#gradient-${option.id})`}
+                      className="transition-all duration-500"
+                    />
+                  )}
+                  
+                  {/* Female haircut - longer flowing hair */}
+                  {option.id === 'female' && (
+                    <>
+                      {/* Hair top */}
+                      <path
+                        d="M32 42 C32 26, 40 20, 50 20 C60 20, 68 26, 68 42 C68 32, 60 24, 50 24 C40 24, 32 32, 32 42"
+                        fill={`url(#gradient-${option.id})`}
+                        className="transition-all duration-500"
+                      />
+                      {/* Left flowing hair */}
+                      <path
+                        d="M32 42 C28 52, 28 65, 30 80 C30 70, 30 55, 34 45 Z"
+                        fill={`url(#gradient-${option.id})`}
+                        className="transition-all duration-500"
+                      />
+                      {/* Right flowing hair */}
+                      <path
+                        d="M68 42 C72 52, 72 65, 70 80 C70 70, 70 55, 66 45 Z"
+                        fill={`url(#gradient-${option.id})`}
+                        className="transition-all duration-500"
+                      />
+                    </>
+                  )}
+                  
+                  {/* Head - same for both */}
+                  <ellipse 
+                    cx="50" 
+                    cy="50" 
+                    rx="16" 
+                    ry="20"
+                    fill={`url(#gradient-${option.id})`}
+                    className="transition-all duration-500"
+                  />
+                  
+                  {/* Neck */}
+                  <rect
+                    x="43"
+                    y="68"
+                    width="14"
+                    height="16"
+                    fill={`url(#gradient-${option.id})`}
+                    className="transition-all duration-500"
+                  />
+                  
+                  {/* Shoulders */}
+                  <ellipse
+                    cx="50"
+                    cy="92"
+                    rx="28"
+                    ry="16"
+                    fill={`url(#gradient-${option.id})`}
+                    className="transition-all duration-500"
+                  />
+                </svg>
               </div>
               
               {/* Label */}
