@@ -124,11 +124,20 @@ export default function MirrorRevealScreen({ screen }: MirrorRevealScreenProps) 
                       transition={{ duration: 0.5, delay: index * 0.3 }}
                       className={`font-refined text-lg leading-relaxed ${
                         paragraph.startsWith('The question')
-                          ? 'text-prism-electric-blue italic mt-6'
+                          ? 'text-prism-muted-light italic mt-6'
                           : 'text-prism-white/90'
                       }`}
                     >
-                      {paragraph}
+                      {/* Handle line breaks within paragraphs (especially for the question/answer format) */}
+                      {paragraph.includes('\n') 
+                        ? paragraph.split('\n').map((line, lineIndex) => (
+                            <span key={lineIndex}>
+                              {line}
+                              {lineIndex < paragraph.split('\n').length - 1 && <br />}
+                            </span>
+                          ))
+                        : paragraph
+                      }
                     </motion.p>
                   ))}
                 </div>

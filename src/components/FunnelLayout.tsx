@@ -2,7 +2,7 @@
 
 import { ReactNode } from 'react';
 import { useFunnelStore } from '@/lib/store';
-import FrequencyWave from './FrequencyWave';
+import ProgressLine from './ProgressLine';
 
 interface FunnelLayoutProps {
   children: ReactNode;
@@ -29,16 +29,14 @@ export default function FunnelLayout({
 
   return (
     <div className="relative min-h-screen min-h-[100dvh] bg-prism-black flex flex-col overflow-x-hidden">
-      {/* Frequency wave progress indicator at top - thin and subtle */}
+      {/* Ultra-minimal progress line at the very top */}
       {showProgress && (
-        <div className="fixed top-0 left-0 right-0 z-10 pointer-events-none">
-          <div className="h-10 mt-3">
-            <FrequencyWave position="top" />
-          </div>
+        <div className="fixed top-0 left-0 right-0 z-50">
+          <ProgressLine />
         </div>
       )}
 
-      {/* Back button with frosted glass background - higher z-index */}
+      {/* Back button */}
       {showBackButton && currentScreen > 1 && (
         <div className="fixed top-4 left-4 sm:top-5 sm:left-5 z-50">
           <button
@@ -62,12 +60,9 @@ export default function FunnelLayout({
         </div>
       )}
 
-      {/* Main content - higher z-index than wave so text covers it when scrolling */}
-      <main className="relative z-20 flex-1 flex flex-col items-center sm:justify-center px-4 sm:px-6 pt-4 sm:pt-6 pb-8 sm:pb-12 overflow-y-auto">
-        {/* Gradient cover that fades from transparent (showing wave) to solid black */}
-        <div className="w-full h-10 bg-gradient-to-b from-transparent via-prism-black/50 to-prism-black" />
-        {/* Content with solid background */}
-        <div className="w-full flex-1 flex flex-col items-center sm:justify-center bg-prism-black -mt-2">
+      {/* Main content */}
+      <main className="flex-1 flex flex-col items-center sm:justify-center px-4 sm:px-6 pt-6 sm:pt-8 pb-8 sm:pb-12">
+        <div className="w-full flex-1 flex flex-col items-center sm:justify-center">
           {children}
         </div>
       </main>

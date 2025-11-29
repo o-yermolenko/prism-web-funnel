@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useFunnelStore } from '@/lib/store';
 import FunnelLayout from '../FunnelLayout';
+import DecryptedText from '../DecryptedText';
 import { FunnelScreen } from '@/types/funnel';
 
 interface GenderScreenProps {
@@ -41,14 +42,24 @@ export default function GenderScreen({ screen }: GenderScreenProps) {
           </motion.div>
         )}
 
-        {/* Header */}
+        {/* Header with decrypt animation */}
         <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.3, delay: 0.1 }}
           className="text-4xl md:text-5xl lg:text-6xl font-refined font-medium text-prism-white mb-4 tracking-tight leading-tight"
         >
-          {screen.header}
+          <DecryptedText
+            text={screen.header}
+            animateOn="view"
+            sequential={true}
+            speed={30}
+            maxIterations={15}
+            revealDirection="center"
+            characters="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+            className="text-prism-white"
+            encryptedClassName="text-prism-muted"
+          />
         </motion.h1>
 
         {/* Subheader */}

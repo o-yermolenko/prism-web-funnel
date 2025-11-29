@@ -42,30 +42,32 @@ export default function QuestionMultiScreen({ screen }: QuestionMultiScreenProps
   return (
     <FunnelLayout showProgress={screen.showProgress} showBackButton={screen.showBackButton}>
       <div className="w-full max-w-xl mx-auto">
-        {/* Header */}
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="text-2xl md:text-3xl font-refined font-medium text-prism-white mb-4 tracking-tight text-center leading-relaxed"
-        >
-          {screen.header}
-        </motion.h1>
-
-        {/* Subheader */}
-        {screen.subheader && (
-          <motion.p
+        {/* Header Section - consistent spacing before options */}
+        <div className="mb-16">
+          <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-prism-muted-light mb-10 text-center"
+            transition={{ duration: 0.5 }}
+            className="text-2xl md:text-3xl font-refined font-medium text-prism-white tracking-tight text-center leading-relaxed"
           >
-            {screen.subheader}
-          </motion.p>
-        )}
+            {screen.header}
+          </motion.h1>
+
+          {/* Subheader */}
+          {screen.subheader && (
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="text-prism-muted-light mt-6 text-center"
+            >
+              {screen.subheader}
+            </motion.p>
+          )}
+        </div>
 
         {/* Options */}
-        <div className="space-y-3">
+        <div className="space-y-4">
           {screen.options?.map((option, index) => {
             const isSelected = selected.includes(option.id);
             
@@ -124,7 +126,7 @@ export default function QuestionMultiScreen({ screen }: QuestionMultiScreenProps
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.5 }}
-          className="mt-10 flex justify-center"
+          className="mt-16 flex justify-center"
         >
           <button
             onClick={handleContinue}

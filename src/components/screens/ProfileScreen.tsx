@@ -59,16 +59,16 @@ export default function ProfileScreen({ screen }: ProfileScreenProps) {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="border-t border-b border-prism-muted/20 py-10 mb-10"
         >
-          <div className="space-y-6 text-left max-w-lg mx-auto">
+          <div className="space-y-3 text-left max-w-lg mx-auto">
             {screen.content?.map((line, index) => (
               <motion.p
                 key={index}
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, delay: 0.4 + index * 0.15 }}
-                className={`font-refined text-xl leading-relaxed ${
+                className={`font-refined text-xl leading-normal ${
                   line === '' 
-                    ? 'h-4' 
+                    ? 'h-6' 
                     : 'text-prism-white/90'
                 }`}
               >

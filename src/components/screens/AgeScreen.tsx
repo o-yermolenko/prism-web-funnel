@@ -26,34 +26,36 @@ export default function AgeScreen({ screen }: AgeScreenProps) {
   return (
     <FunnelLayout showProgress={screen.showProgress} showBackButton={screen.showBackButton}>
       <div className="w-full max-w-xl mx-auto text-center">
-        {/* Header */}
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="text-3xl md:text-4xl font-refined font-medium text-prism-white mb-3 tracking-tight"
-        >
-          {screen.header}
-        </motion.h1>
-
-        {/* Subheader */}
-        {screen.subheader && (
-          <motion.p
+        {/* Header Section - consistent spacing before options */}
+        <div className="mb-16">
+          <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-prism-muted-light mb-12"
+            transition={{ duration: 0.5 }}
+            className="text-3xl md:text-4xl font-refined font-medium text-prism-white tracking-tight"
           >
-            {screen.subheader}
-          </motion.p>
-        )}
+            {screen.header}
+          </motion.h1>
+
+          {/* Subheader */}
+          {screen.subheader && (
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="text-prism-muted-light mt-6"
+            >
+              {screen.subheader}
+            </motion.p>
+          )}
+        </div>
 
         {/* Age Options */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="grid grid-cols-2 sm:grid-cols-3 gap-3"
+          className="grid grid-cols-2 sm:grid-cols-3 gap-4"
         >
           {screen.options?.map((option, index) => (
             <motion.button
