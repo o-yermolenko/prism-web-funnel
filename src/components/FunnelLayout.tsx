@@ -60,9 +60,9 @@ export default function FunnelLayout({
         </div>
       )}
 
-      {/* Main content */}
-      <main className="flex-1 flex flex-col items-center sm:justify-center px-4 sm:px-6 pt-6 sm:pt-8 pb-8 sm:pb-12">
-        <div className="w-full flex-1 flex flex-col items-center sm:justify-center">
+      {/* Main content - centered with offset for back button on mobile */}
+      <main className="flex-1 flex flex-col items-center justify-center px-4 sm:px-6 pt-16 sm:pt-8 pb-8 sm:pb-12">
+        <div className="w-full flex flex-col items-center justify-center -mt-12 sm:-mt-8">
           {children}
         </div>
       </main>
