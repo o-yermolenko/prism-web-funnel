@@ -11,7 +11,7 @@ export const FUNNEL_SCREENS: FunnelScreen[] = [
     type: 'gender',
     emotionalState: 'Curious',
     purpose: 'Entry (Gender)',
-    header: 'Your Mind. Finally Unfiltered.',
+    header: 'Your Mind.\nFinally Unfiltered.',
     badge: '3-MINUTE QUIZ',
     subheader: 'Discover why you feel exhausting to be around',
     options: [

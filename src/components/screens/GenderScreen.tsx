@@ -49,17 +49,22 @@ export default function GenderScreen({ screen }: GenderScreenProps) {
           transition={{ duration: 0.3, delay: 0.1 }}
           className="text-4xl md:text-5xl lg:text-6xl font-refined font-medium text-prism-white mb-4 tracking-tight leading-tight"
         >
-          <DecryptedText
-            text={screen.header}
-            animateOn="view"
-            sequential={true}
-            speed={30}
-            maxIterations={15}
-            revealDirection="center"
-            characters="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
-            className="text-prism-white"
-            encryptedClassName="text-prism-muted"
-          />
+          {screen.header.split('\n').map((line, index) => (
+            <span key={index}>
+              <DecryptedText
+                text={line}
+                animateOn="view"
+                sequential={true}
+                speed={30}
+                maxIterations={15}
+                revealDirection="center"
+                characters="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+                className="text-prism-white"
+                encryptedClassName="text-prism-muted"
+              />
+              {index < screen.header.split('\n').length - 1 && <br />}
+            </span>
+          ))}
         </motion.h1>
 
         {/* Subheader */}
