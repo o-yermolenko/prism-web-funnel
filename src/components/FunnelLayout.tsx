@@ -1,6 +1,6 @@
 'use client';
 
-import { ReactNode } from 'react';
+import { ReactNode, useEffect } from 'react';
 import { useFunnelStore } from '@/lib/store';
 import ProgressLine from './ProgressLine';
 
@@ -18,6 +18,11 @@ export default function FunnelLayout({
   onBack,
 }: FunnelLayoutProps) {
   const { currentScreen, prevScreen } = useFunnelStore();
+
+  // Scroll to top when screen changes
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [currentScreen]);
 
   const handleBack = () => {
     if (onBack) {
@@ -60,9 +65,9 @@ export default function FunnelLayout({
         </div>
       )}
 
-      {/* Main content - centered with offset for back button on mobile */}
-      <main className="flex-1 flex flex-col items-center justify-center px-4 sm:px-6 pt-16 sm:pt-8 pb-8 sm:pb-12">
-        <div className="w-full flex flex-col items-center justify-center -mt-12 sm:-mt-8">
+      {/* Main content - proper spacing below back button on mobile */}
+      <main className="flex-1 flex flex-col items-center px-4 sm:px-6 pt-20 sm:pt-8 pb-8 sm:pb-12 sm:justify-center">
+        <div className="w-full flex flex-col items-center sm:justify-center">
           {children}
         </div>
       </main>
