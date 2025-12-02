@@ -12,3 +12,11 @@ export { default as TestimonialsScreen } from './TestimonialsScreen';
 export { default as PaywallScreen } from './PaywallScreen';
 export { default as ConfirmationScreen } from './ConfirmationScreen';
 
+// LTV-maximizing screens
+export { default as SocialProofScreen } from './SocialProofScreen';
+export { default as StatisticsVisualScreen } from './StatisticsVisualScreen';
+export { default as AssessmentScreen } from './AssessmentScreen';
+export { default as BeforeAfterScreen } from './BeforeAfterScreen';
+export { default as ProgressChartScreen } from './ProgressChartScreen';
+export { default as LoadingEngagementScreen } from './LoadingEngagementScreen';
+

@@ -7,19 +7,26 @@
    ============================================ */
 
 :root {
-  /* Colors - PRISM Palette */
-  --prism-black: #000000;
+  /* Colors - PRISM Palette (Conversion-Optimized) */
+  --prism-black: #050508;
+  --prism-deep: #0a0a0f;
+  --prism-surface: #12121a;
   --prism-white: #ffffff;
-  --prism-electric-blue: #0066ff;
-  --prism-muted: #666666;
-  --prism-muted-light: #888888;
+  --prism-electric-blue: #0088ff;
+  --prism-cyan: #00d4ff;
+  --prism-muted: #6b6b7b;
+  --prism-muted-light: #9090a0;
+  
+  /* Accent colors for conversion */
+  --prism-success: #00e676;
+  --prism-warning: #ff9100;
+  --prism-urgency: #ff3d71;
   
   /* Prism dispersion colors - for subtle rainbow effects */
   --prism-red: #ff0040;
   --prism-orange: #ff6b00;
   --prism-yellow: #ffd000;
   --prism-green: #00ff88;
-  --prism-cyan: #00d4ff;
   --prism-violet: #8800ff;
   
   /* Typography - System font stacks */
@@ -280,29 +287,36 @@ body {
 }
 
 /* ============================================
-   BUTTON STYLES
+   BUTTON STYLES (Conversion-Optimized)
    ============================================ */
 
-/* Primary CTA - minimal, sharp */
+/* Primary CTA - Bold gradient, high contrast */
 .btn-primary {
-  background: var(--prism-white);
-  color: var(--prism-black);
+  background: linear-gradient(135deg, var(--prism-electric-blue) 0%, var(--prism-cyan) 100%);
+  color: var(--prism-white);
   border: none;
-  padding: 1rem 2rem;
+  padding: 1.125rem 2.5rem;
   font-family: var(--font-refined);
-  font-size: 1rem;
-  font-weight: 500;
+  font-size: 1.125rem;
+  font-weight: 600;
   cursor: pointer;
   transition: all var(--timing-default) var(--ease-prism);
   letter-spacing: -0.01em;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(0, 136, 255, 0.3);
+  text-transform: uppercase;
 }
 
 .btn-primary:hover {
-  background: var(--prism-electric-blue);
-  color: var(--prism-white);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(0, 136, 255, 0.4);
 }
 
-/* Secondary button - text only */
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+/* Secondary button - outlined with glow */
 .btn-secondary {
   background: transparent;
   color: var(--prism-white);
@@ -310,14 +324,43 @@ body {
   padding: 1rem 2rem;
   font-family: var(--font-refined);
   font-size: 1rem;
-  font-weight: 400;
+  font-weight: 500;
   cursor: pointer;
   transition: all var(--timing-default) var(--ease-prism);
   letter-spacing: -0.01em;
+  border-radius: 12px;
 }
 
 .btn-secondary:hover {
-  border-color: var(--prism-white);
+  border-color: var(--prism-electric-blue);
+  box-shadow: 0 0 20px rgba(0, 136, 255, 0.15);
+}
+
+/* Option button - for quiz choices */
+.btn-option {
+  background: var(--prism-surface);
+  color: var(--prism-white);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 1.25rem 1.5rem;
+  font-family: var(--font-refined);
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--timing-default) var(--ease-prism);
+  border-radius: 16px;
+  text-align: left;
+  width: 100%;
+}
+
+.btn-option:hover {
+  border-color: var(--prism-electric-blue);
+  background: rgba(0, 136, 255, 0.08);
+}
+
+.btn-option.selected {
+  border-color: var(--prism-electric-blue);
+  background: rgba(0, 136, 255, 0.12);
+  box-shadow: 0 0 20px rgba(0, 136, 255, 0.2);
 }
 
 /* Text button - minimal */
@@ -369,6 +412,101 @@ body {
 
 .bg-electric {
   background-color: var(--prism-electric-blue);
+}
+
+/* ============================================
+   CONVERSION ELEMENTS
+   ============================================ */
+
+/* Trust badge */
+.trust-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 100px;
+  font-size: 0.875rem;
+  color: var(--prism-muted-light);
+}
+
+.trust-badge svg,
+.trust-badge .icon {
+  color: var(--prism-success);
+}
+
+/* Social proof counter */
+.social-proof {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1.25rem;
+  background: linear-gradient(135deg, rgba(0, 136, 255, 0.1) 0%, rgba(0, 212, 255, 0.05) 100%);
+  border: 1px solid rgba(0, 136, 255, 0.2);
+  border-radius: 12px;
+}
+
+/* Progress step indicator */
+.step-indicator {
+  font-family: var(--font-raw);
+  font-size: 0.75rem;
+  color: var(--prism-muted-light);
+  letter-spacing: 0.05em;
+}
+
+/* Gradient background effects */
+.bg-gradient-dark {
+  background: linear-gradient(180deg, var(--prism-black) 0%, var(--prism-deep) 50%, var(--prism-black) 100%);
+}
+
+.bg-gradient-radial {
+  background: radial-gradient(ellipse at 50% 0%, rgba(0, 136, 255, 0.08) 0%, transparent 50%);
+}
+
+.bg-gradient-glow {
+  position: relative;
+}
+
+.bg-gradient-glow::before {
+  content: '';
+  position: absolute;
+  top: -200px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(0, 136, 255, 0.12) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Card with glow effect */
+.card-glow {
+  background: var(--prism-surface);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 16px;
+  transition: all var(--timing-default) var(--ease-prism);
+}
+
+.card-glow:hover {
+  border-color: rgba(0, 136, 255, 0.3);
+  box-shadow: 0 0 30px rgba(0, 136, 255, 0.1);
+}
+
+/* Risk/status indicator bar */
+.status-bar {
+  height: 8px;
+  border-radius: 4px;
+  background: linear-gradient(90deg, var(--prism-success) 0%, var(--prism-warning) 50%, var(--prism-urgency) 100%);
+}
+
+.status-indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid var(--prism-white);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 /* ============================================

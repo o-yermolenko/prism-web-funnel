@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { useFunnelStore } from '@/lib/store';
+import { useFunnelNavigation } from '@/hooks/useFunnelNavigation';
 import FunnelLayout from '../FunnelLayout';
 import { FunnelScreen } from '@/types/funnel';
 
@@ -11,16 +11,12 @@ interface MirrorSelectScreenProps {
 }
 
 export default function MirrorSelectScreen({ screen }: MirrorSelectScreenProps) {
-  const { setAnswer, nextScreen } = useFunnelStore();
+  const { saveAnswerAndNextDelayed } = useFunnelNavigation();
   const [selected, setSelected] = useState<string | null>(null);
 
   const handleSelect = (optionId: string) => {
     setSelected(optionId);
-    setAnswer(screen.id, optionId);
-    
-    setTimeout(() => {
-      nextScreen();
-    }, 600);
+    saveAnswerAndNextDelayed(optionId, 600);
   };
 
   return (
@@ -99,4 +95,3 @@ export default function MirrorSelectScreen({ screen }: MirrorSelectScreenProps) 
     </FunnelLayout>
   );
 }
-

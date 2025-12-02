@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { useFunnelStore } from '@/lib/store';
+import { useFunnelNavigation } from '@/hooks/useFunnelNavigation';
 import FunnelLayout from '../FunnelLayout';
 import { FunnelScreen } from '@/types/funnel';
 
@@ -10,12 +10,12 @@ interface ProfileScreenProps {
 }
 
 export default function ProfileScreen({ screen }: ProfileScreenProps) {
-  const { nextScreen, getAnswer } = useFunnelStore();
+  const { goToNext, getAnswer } = useFunnelNavigation();
   
-  // Get personalized data
-  const primaryNeed = getAnswer(14) as string;
-  const bestTime = getAnswer(19) as string;
-  const dailyPractice = getAnswer(20) as string;
+  // Get personalized data from slugs
+  const primaryNeed = getAnswer('primary-need') as string;
+  const bestTime = getAnswer('use-timing') as string;
+  const dailyPractice = getAnswer('time-commitment') as string;
 
   // Map answers to display text
   const needMap: Record<string, string> = {
@@ -118,7 +118,7 @@ export default function ProfileScreen({ screen }: ProfileScreenProps) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 1.8 }}
-          onClick={() => nextScreen()}
+          onClick={() => goToNext()}
           className="btn-primary px-12 py-4 text-lg hover:shadow-prism transition-shadow duration-300"
         >
           Get early access

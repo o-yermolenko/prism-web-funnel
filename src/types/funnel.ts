@@ -10,10 +10,17 @@ export type ScreenType =
   | 'mirror-reveal'
   | 'email'
   | 'loading'
+  | 'loading-engagement'
   | 'profile'
   | 'testimonials'
   | 'paywall'
-  | 'confirmation';
+  | 'confirmation'
+  // New LTV-maximizing screen types
+  | 'social-proof'
+  | 'statistics-visual'
+  | 'assessment'
+  | 'before-after'
+  | 'progress-chart';
 
 export interface FunnelOption {
   id: string;
@@ -23,8 +30,22 @@ export interface FunnelOption {
   value?: string;
 }
 
+export interface AssessmentMetric {
+  label: string;
+  value: string;
+  level: 'low' | 'medium' | 'high' | 'critical';
+  icon?: string;
+}
+
+export interface BeforeAfterState {
+  label: string;
+  before: string;
+  after: string;
+}
+
 export interface FunnelScreen {
   id: number;
+  slug: string;
   type: ScreenType;
   emotionalState: string;
   purpose: string;
@@ -42,6 +63,38 @@ export interface FunnelScreen {
     title: string;
     items: string[];
     warning?: string;
+  };
+  // Social proof data
+  socialProof?: {
+    userCount: string;
+    mediaLogos?: string[];
+    quote?: {
+      text: string;
+      source: string;
+    };
+  };
+  // Assessment metrics
+  assessment?: {
+    riskLevel: 'low' | 'medium' | 'high' | 'critical';
+    riskLabel: string;
+    metrics: AssessmentMetric[];
+    summary: string;
+  };
+  // Before/After comparison
+  beforeAfter?: {
+    states: BeforeAfterState[];
+    timeframe?: string;
+  };
+  // Engagement questions for loading
+  engagementQuestions?: {
+    question: string;
+    options: string[];
+  }[];
+  // Progress chart data
+  progressChart?: {
+    timePoints: string[];
+    withProduct: number[];
+    withoutProduct: number[];
   };
   autoAdvance?: boolean;
   showProgress?: boolean;

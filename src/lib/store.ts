@@ -1,67 +1,74 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
+import { FUNNEL_SCREENS, getScreenBySlug, getNextScreen, getPrevScreen, getScreenIndex } from './funnel-data';
 
 interface FunnelStore {
   // Current state
-  currentScreen: number;
-  answers: Record<number, string | string[]>;
+  currentSlug: string;
+  answers: Record<string, string | string[]>;
   email: string;
   startedAt: number | null;
   
   // Actions
-  setScreen: (screen: number) => void;
-  nextScreen: () => void;
-  prevScreen: () => void;
-  setAnswer: (screenId: number, answer: string | string[]) => void;
+  setCurrentSlug: (slug: string) => void;
+  setAnswer: (slug: string, answer: string | string[]) => void;
   setEmail: (email: string) => void;
   resetFunnel: () => void;
   
-  // Computed
-  getAnswer: (screenId: number) => string | string[] | undefined;
+  // Computed helpers
+  getAnswer: (slug: string) => string | string[] | undefined;
   getProgress: () => number;
+  getNextSlug: () => string | undefined;
+  getPrevSlug: () => string | undefined;
 }
+
+const FIRST_SCREEN_SLUG = FUNNEL_SCREENS[0]?.slug || 'gender';
 
 export const useFunnelStore = create<FunnelStore>()(
   persist(
     (set, get) => ({
-      currentScreen: 1,
+      currentSlug: FIRST_SCREEN_SLUG,
       answers: {},
       email: '',
       startedAt: null,
 
-      setScreen: (screen) => set({ currentScreen: screen }),
-      
-      nextScreen: () => set((state) => {
-        const next = state.currentScreen + 1;
-        return { 
-          currentScreen: next,
-          startedAt: state.startedAt ?? Date.now()
-        };
-      }),
-      
-      prevScreen: () => set((state) => ({
-        currentScreen: Math.max(1, state.currentScreen - 1)
+      setCurrentSlug: (slug) => set((state) => ({ 
+        currentSlug: slug,
+        startedAt: state.startedAt ?? Date.now()
       })),
       
-      setAnswer: (screenId, answer) => set((state) => ({
-        answers: { ...state.answers, [screenId]: answer }
+      setAnswer: (slug, answer) => set((state) => ({
+        answers: { ...state.answers, [slug]: answer }
       })),
       
       setEmail: (email) => set({ email }),
       
       resetFunnel: () => set({
-        currentScreen: 1,
+        currentSlug: FIRST_SCREEN_SLUG,
         answers: {},
         email: '',
         startedAt: null,
       }),
       
-      getAnswer: (screenId) => get().answers[screenId],
+      getAnswer: (slug) => get().answers[slug],
       
       getProgress: () => {
-        const { currentScreen } = get();
-        // Progress based on total screens (26)
-        return Math.min(100, Math.round((currentScreen / 26) * 100));
+        const { currentSlug } = get();
+        const currentIndex = getScreenIndex(currentSlug);
+        const totalScreens = FUNNEL_SCREENS.length;
+        return Math.min(100, Math.round(((currentIndex + 1) / totalScreens) * 100));
+      },
+      
+      getNextSlug: () => {
+        const { currentSlug } = get();
+        const nextScreen = getNextScreen(currentSlug);
+        return nextScreen?.slug;
+      },
+      
+      getPrevSlug: () => {
+        const { currentSlug } = get();
+        const prevScreen = getPrevScreen(currentSlug);
+        return prevScreen?.slug;
       },
     }),
     {
@@ -69,4 +76,3 @@ export const useFunnelStore = create<FunnelStore>()(
     }
   )
 );
-

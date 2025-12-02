@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { useFunnelStore } from '@/lib/store';
+import { useFunnelNavigation } from '@/hooks/useFunnelNavigation';
 import FunnelLayout from '../FunnelLayout';
 import { FunnelScreen } from '@/types/funnel';
 import { TESTIMONIALS } from '@/lib/funnel-data';
@@ -11,7 +11,7 @@ interface TestimonialsScreenProps {
 }
 
 export default function TestimonialsScreen({ screen }: TestimonialsScreenProps) {
-  const { nextScreen } = useFunnelStore();
+  const { goToNext } = useFunnelNavigation();
 
   return (
     <FunnelLayout showProgress={false} showBackButton={screen.showBackButton}>
@@ -76,7 +76,7 @@ export default function TestimonialsScreen({ screen }: TestimonialsScreenProps) 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.8 }}
-          onClick={() => nextScreen()}
+          onClick={() => goToNext()}
           className="btn-primary px-12 py-4 text-lg hover:shadow-prism transition-shadow duration-300"
         >
           Join them

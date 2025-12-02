@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useFunnelStore } from '@/lib/store';
+import { useFunnelNavigation } from '@/hooks/useFunnelNavigation';
 import FunnelLayout from '../FunnelLayout';
 import { FunnelScreen } from '@/types/funnel';
 import { MIRROR_INSIGHTS } from '@/lib/funnel-data';
@@ -12,12 +12,12 @@ interface MirrorRevealScreenProps {
 }
 
 export default function MirrorRevealScreen({ screen }: MirrorRevealScreenProps) {
-  const { getAnswer, nextScreen } = useFunnelStore();
+  const { getAnswer, goToNext } = useFunnelNavigation();
   const [showInsight, setShowInsight] = useState(false);
   const [showButton, setShowButton] = useState(false);
   
-  // Get the selected thought from previous screen (screen 16)
-  const selectedThought = getAnswer(16) as string;
+  // Get the selected thought from previous screen (mirror-select)
+  const selectedThought = getAnswer('mirror-select') as string;
   const insight = MIRROR_INSIGHTS[selectedThought] || MIRROR_INSIGHTS['pretending'];
 
   useEffect(() => {
@@ -156,7 +156,7 @@ export default function MirrorRevealScreen({ screen }: MirrorRevealScreenProps) 
               className="mt-10 flex justify-center"
             >
               <button
-                onClick={() => nextScreen()}
+                onClick={() => goToNext()}
                 className="btn-primary px-12 py-4 text-lg hover:shadow-prism transition-shadow duration-300"
               >
                 I want more of this
@@ -168,4 +168,3 @@ export default function MirrorRevealScreen({ screen }: MirrorRevealScreenProps) 
     </FunnelLayout>
   );
 }
-

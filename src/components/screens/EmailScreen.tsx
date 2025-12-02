@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { useFunnelStore } from '@/lib/store';
+import { useFunnelNavigation } from '@/hooks/useFunnelNavigation';
 import FunnelLayout from '../FunnelLayout';
 import { FunnelScreen } from '@/types/funnel';
 
@@ -11,7 +11,7 @@ interface EmailScreenProps {
 }
 
 export default function EmailScreen({ screen }: EmailScreenProps) {
-  const { setEmail, nextScreen } = useFunnelStore();
+  const { saveEmailAndNext } = useFunnelNavigation();
   const [email, setEmailValue] = useState('');
   const [isValid, setIsValid] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
@@ -30,8 +30,7 @@ export default function EmailScreen({ screen }: EmailScreenProps) {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (isValid) {
-      setEmail(email);
-      nextScreen();
+      saveEmailAndNext(email);
     }
   };
 
@@ -139,4 +138,3 @@ export default function EmailScreen({ screen }: EmailScreenProps) {
     </FunnelLayout>
   );
 }
-

@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { useFunnelStore } from '@/lib/store';
+import { useFunnelNavigation } from '@/hooks/useFunnelNavigation';
 import FunnelLayout from '../FunnelLayout';
 import { FunnelScreen } from '@/types/funnel';
 
@@ -11,7 +11,7 @@ interface QuestionMultiScreenProps {
 }
 
 export default function QuestionMultiScreen({ screen }: QuestionMultiScreenProps) {
-  const { setAnswer, nextScreen } = useFunnelStore();
+  const { saveAnswerAndNext } = useFunnelNavigation();
   const [selected, setSelected] = useState<string[]>([]);
 
   const handleToggle = (optionId: string) => {
@@ -34,8 +34,7 @@ export default function QuestionMultiScreen({ screen }: QuestionMultiScreenProps
 
   const handleContinue = () => {
     if (selected.length > 0) {
-      setAnswer(screen.id, selected);
-      nextScreen();
+      saveAnswerAndNext(selected);
     }
   };
 
@@ -43,12 +42,12 @@ export default function QuestionMultiScreen({ screen }: QuestionMultiScreenProps
     <FunnelLayout showProgress={screen.showProgress} showBackButton={screen.showBackButton}>
       <div className="w-full max-w-xl mx-auto">
         {/* Header Section - consistent spacing before options */}
-        <div className="mb-16">
+        <div className="mb-12 sm:mb-16">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="text-2xl md:text-3xl font-refined font-medium text-prism-white tracking-tight text-center leading-relaxed"
+            className="text-2xl md:text-3xl lg:text-4xl font-refined font-semibold text-prism-white tracking-tight text-center leading-snug"
           >
             {screen.header}
           </motion.h1>
@@ -59,37 +58,37 @@ export default function QuestionMultiScreen({ screen }: QuestionMultiScreenProps
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="text-prism-muted-light mt-6 text-center"
+              className="text-prism-muted-light mt-4 text-center text-base md:text-lg"
             >
               {screen.subheader}
             </motion.p>
           )}
         </div>
 
-        {/* Options */}
-        <div className="space-y-4">
+        {/* Options - Enhanced multi-select cards */}
+        <div className="space-y-3">
           {screen.options?.map((option, index) => {
             const isSelected = selected.includes(option.id);
             
             return (
               <motion.button
                 key={option.id}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.4, delay: 0.15 + index * 0.06 }}
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: 0.1 + index * 0.06 }}
                 onClick={() => handleToggle(option.id)}
-                className={`w-full group relative text-left p-5 border transition-all duration-300 ${
+                className={`w-full group relative text-left p-5 rounded-2xl transition-all duration-300 ${
                   isSelected
-                    ? 'border-prism-electric-blue bg-prism-electric-blue/5'
-                    : 'border-prism-muted/30 hover:border-prism-muted-light'
+                    ? 'border-2 border-prism-electric-blue bg-gradient-to-r from-prism-electric-blue/12 to-prism-cyan/5 shadow-prism'
+                    : 'border border-white/10 bg-prism-surface hover:border-prism-electric-blue/40 hover:bg-prism-surface/80'
                 }`}
               >
                 <div className="flex items-center gap-4">
                   {/* Checkbox */}
-                  <div className={`w-5 h-5 border-2 transition-all duration-300 flex items-center justify-center ${
+                  <div className={`w-6 h-6 rounded-lg border-2 transition-all duration-300 flex items-center justify-center flex-shrink-0 ${
                     isSelected
-                      ? 'border-prism-electric-blue bg-prism-electric-blue'
-                      : 'border-prism-muted/50'
+                      ? 'border-prism-electric-blue bg-gradient-to-r from-prism-electric-blue to-prism-cyan'
+                      : 'border-prism-muted/40 group-hover:border-prism-electric-blue/50'
                   }`}>
                     {isSelected && (
                       <motion.svg
@@ -108,7 +107,7 @@ export default function QuestionMultiScreen({ screen }: QuestionMultiScreenProps
                   </div>
                   
                   {/* Text */}
-                  <span className={`text-lg transition-colors duration-300 ${
+                  <span className={`text-base md:text-lg font-medium transition-colors duration-300 ${
                     isSelected
                       ? 'text-prism-white'
                       : 'text-prism-muted-light group-hover:text-prism-white'
@@ -121,20 +120,33 @@ export default function QuestionMultiScreen({ screen }: QuestionMultiScreenProps
           })}
         </div>
 
+        {/* Selection count badge */}
+        {selected.length > 0 && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="mt-6 flex justify-center"
+          >
+            <span className="text-sm text-prism-cyan bg-prism-cyan/10 px-4 py-1.5 rounded-full border border-prism-cyan/20">
+              {selected.length} selected
+            </span>
+          </motion.div>
+        )}
+
         {/* Continue button */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.5 }}
-          className="mt-16 flex justify-center"
+          className="mt-8 flex justify-center"
         >
           <button
             onClick={handleContinue}
             disabled={selected.length === 0}
-            className={`px-12 py-4 text-lg transition-all duration-300 ${
+            className={`w-full sm:w-auto transition-all duration-300 ${
               selected.length > 0
-                ? 'btn-primary hover:shadow-prism'
-                : 'bg-prism-muted/20 text-prism-muted cursor-not-allowed'
+                ? 'btn-primary'
+                : 'px-12 py-4 rounded-xl bg-prism-surface text-prism-muted cursor-not-allowed border border-white/5'
             }`}
           >
             Continue
@@ -144,4 +156,3 @@ export default function QuestionMultiScreen({ screen }: QuestionMultiScreenProps
     </FunnelLayout>
   );
 }
-

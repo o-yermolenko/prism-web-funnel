@@ -2,8 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { useFunnelStore } from '@/lib/store';
-import FunnelLayout from '../FunnelLayout';
+import { useFunnelNavigation } from '@/hooks/useFunnelNavigation';
 import { FunnelScreen } from '@/types/funnel';
 
 interface PaywallScreenProps {
@@ -11,7 +10,7 @@ interface PaywallScreenProps {
 }
 
 export default function PaywallScreen({ screen }: PaywallScreenProps) {
-  const { nextScreen } = useFunnelStore();
+  const { goToNext } = useFunnelNavigation();
   const [countdown, setCountdown] = useState(10 * 60); // 10 minutes in seconds
   const [selectedPlan, setSelectedPlan] = useState<'monthly' | 'yearly'>('monthly');
 
@@ -31,7 +30,7 @@ export default function PaywallScreen({ screen }: PaywallScreenProps) {
 
   const handlePurchase = () => {
     // In production, this would integrate with payment
-    nextScreen();
+    goToNext();
   };
 
   return (
@@ -224,7 +223,7 @@ export default function PaywallScreen({ screen }: PaywallScreenProps) {
             className="mt-8 text-center"
           >
             <button
-              onClick={() => nextScreen()}
+              onClick={() => goToNext()}
               className="text-prism-muted hover:text-prism-muted-light text-sm underline transition-colors duration-300"
             >
               Stay on waitlist instead

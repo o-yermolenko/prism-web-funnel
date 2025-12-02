@@ -9,19 +9,25 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // PRISM color system
+        // PRISM color system (Conversion-Optimized)
         prism: {
-          black: '#000000',
+          black: '#050508',
+          deep: '#0a0a0f',
+          surface: '#12121a',
           white: '#ffffff',
-          'electric-blue': '#0066ff',
-          muted: '#666666',
-          'muted-light': '#888888',
+          'electric-blue': '#0088ff',
+          cyan: '#00d4ff',
+          muted: '#6b6b7b',
+          'muted-light': '#9090a0',
+          // Conversion accent colors
+          success: '#00e676',
+          warning: '#ff9100',
+          urgency: '#ff3d71',
           // Dispersion colors - for subtle rainbow effects
           red: '#ff0040',
           orange: '#ff6b00',
           yellow: '#ffd000',
           green: '#00ff88',
-          cyan: '#00d4ff',
           violet: '#8800ff',
         },
       },
@@ -112,9 +118,18 @@ const config: Config = {
         'display': '1.1',
       },
       boxShadow: {
-        // PRISM glow effects
-        'prism': '0 0 40px rgba(0, 102, 255, 0.15)',
-        'prism-strong': '0 0 60px rgba(0, 102, 255, 0.25)',
+        // PRISM glow effects (enhanced)
+        'prism': '0 0 40px rgba(0, 136, 255, 0.2)',
+        'prism-strong': '0 0 60px rgba(0, 136, 255, 0.35)',
+        'prism-glow': '0 4px 24px rgba(0, 136, 255, 0.3)',
+        'card': '0 4px 20px rgba(0, 0, 0, 0.4)',
+        'card-hover': '0 8px 32px rgba(0, 136, 255, 0.15)',
+      },
+      backgroundImage: {
+        // Gradient backgrounds
+        'gradient-radial': 'radial-gradient(ellipse at 50% 0%, var(--tw-gradient-stops))',
+        'gradient-cta': 'linear-gradient(135deg, #0088ff 0%, #00d4ff 100%)',
+        'gradient-card': 'linear-gradient(180deg, rgba(18, 18, 26, 1) 0%, rgba(10, 10, 15, 1) 100%)',
       },
     },
   },

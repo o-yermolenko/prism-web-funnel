@@ -1,8 +1,10 @@
 'use client';
 
-import { useFunnelStore } from '@/lib/store';
-import { FUNNEL_SCREENS } from '@/lib/funnel-data';
+import { useParams, useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
+import { getScreenBySlug, FUNNEL_SCREENS } from '@/lib/funnel-data';
+import { useFunnelStore } from '@/lib/store';
 import {
   GenderScreen,
   AgeScreen,
@@ -17,24 +19,39 @@ import {
   TestimonialsScreen,
   PaywallScreen,
   ConfirmationScreen,
-  // LTV-maximizing screens
   SocialProofScreen,
   StatisticsVisualScreen,
   AssessmentScreen,
   BeforeAfterScreen,
   ProgressChartScreen,
   LoadingEngagementScreen,
-} from './screens';
+} from '@/components/screens';
 
-export default function ScreenRenderer() {
-  const { currentScreen } = useFunnelStore();
+export default function StepPage() {
+  const params = useParams();
+  const router = useRouter();
+  const step = params.step as string;
+  const { setCurrentSlug } = useFunnelStore();
   
-  const screen = FUNNEL_SCREENS.find(s => s.id === currentScreen);
+  const screen = getScreenBySlug(step);
+  
+  useEffect(() => {
+    if (screen) {
+      setCurrentSlug(step);
+    }
+  }, [step, screen, setCurrentSlug]);
+  
+  // Redirect to first screen if slug not found
+  useEffect(() => {
+    if (!screen && FUNNEL_SCREENS.length > 0) {
+      router.replace(`/${FUNNEL_SCREENS[0].slug}`);
+    }
+  }, [screen, router]);
   
   if (!screen) {
     return (
       <div className="min-h-screen bg-prism-black flex items-center justify-center">
-        <p className="text-prism-muted">Screen not found</p>
+        <p className="text-prism-muted">Loading...</p>
       </div>
     );
   }
@@ -83,7 +100,6 @@ export default function ScreenRenderer() {
       case 'confirmation':
         return <ConfirmationScreen />;
       
-      // LTV-maximizing screens
       case 'social-proof':
         return <SocialProofScreen screen={screen} />;
       
@@ -111,7 +127,7 @@ export default function ScreenRenderer() {
   return (
     <AnimatePresence mode="wait">
       <motion.div
-        key={currentScreen}
+        key={step}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}

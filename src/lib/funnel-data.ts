@@ -8,6 +8,7 @@ export const FUNNEL_SCREENS: FunnelScreen[] = [
   
   {
     id: 1,
+    slug: 'gender',
     type: 'gender',
     emotionalState: 'Curious',
     purpose: 'Entry (Gender)',
@@ -25,6 +26,7 @@ export const FUNNEL_SCREENS: FunnelScreen[] = [
 
   {
     id: 2,
+    slug: 'age',
     type: 'age',
     emotionalState: 'Engaged',
     purpose: 'Personalization (Age)',
@@ -44,11 +46,19 @@ export const FUNNEL_SCREENS: FunnelScreen[] = [
 
   {
     id: 3,
-    type: 'validation',
+    slug: 'social-proof',
+    type: 'social-proof',
     emotionalState: 'Identified',
-    purpose: 'Social proof + hook',
-    header: 'Millions of people feel the same exhaustion.',
-    subheader: 'The exhaustion of being too much for others to understand.',
+    purpose: 'Social proof + authority',
+    header: 'Join 2,500,000+ people',
+    subheader: 'who stopped performing and started understanding themselves',
+    socialProof: {
+      userCount: '2,500,000+',
+      quote: {
+        text: 'Understanding yourself isn\'t self-indulgence. It\'s the foundation of every meaningful change.',
+        source: 'Psychology Today',
+      },
+    },
     showProgress: true,
     showBackButton: true,
   },
@@ -60,6 +70,7 @@ export const FUNNEL_SCREENS: FunnelScreen[] = [
 
   {
     id: 4,
+    slug: 'editing-behavior',
     type: 'question-multi',
     emotionalState: 'Seen',
     purpose: 'Core identification - editing behavior',
@@ -77,6 +88,7 @@ export const FUNNEL_SCREENS: FunnelScreen[] = [
 
   {
     id: 5,
+    slug: 'exhaustion-frequency',
     type: 'question-single',
     emotionalState: 'Uncomfortable',
     purpose: 'Quantify exhaustion frequency',
@@ -93,6 +105,7 @@ export const FUNNEL_SCREENS: FunnelScreen[] = [
 
   {
     id: 6,
+    slug: 'mind-description',
     type: 'question-single',
     emotionalState: 'Recognized',
     purpose: 'Mind description - intensity',
@@ -110,6 +123,7 @@ export const FUNNEL_SCREENS: FunnelScreen[] = [
 
   {
     id: 7,
+    slug: 'performing-self',
     type: 'question-single',
     emotionalState: 'Exposed',
     purpose: 'Core pain - performance',
@@ -127,14 +141,15 @@ export const FUNNEL_SCREENS: FunnelScreen[] = [
 
   {
     id: 8,
-    type: 'validation',
+    slug: 'misunderstood-statistics',
+    type: 'statistics-visual',
     emotionalState: 'Validated but worried',
     purpose: 'Statistic validation + problem amplification',
-    header: '78% of high-intelligence individuals report chronic feelings of loneliness.',
-    subheader: 'Not because they lack relationships. But because they lack real understanding.',
+    header: 'The Hidden Cost of Being Misunderstood',
+    subheader: 'Research reveals a surprising pattern',
     statistics: {
       value: '78%',
-      label: 'report chronic loneliness',
+      label: 'of deep thinkers report chronic feelings of being misunderstood',
       source: 'Journal of Individual Differences, 2019',
     },
     showProgress: true,
@@ -148,6 +163,7 @@ export const FUNNEL_SCREENS: FunnelScreen[] = [
 
   {
     id: 9,
+    slug: 'loneliness',
     type: 'question-single',
     emotionalState: 'Spiraling',
     purpose: 'Loneliness admission',
@@ -165,6 +181,7 @@ export const FUNNEL_SCREENS: FunnelScreen[] = [
 
   {
     id: 10,
+    slug: 'feeling-different',
     type: 'question-single',
     emotionalState: 'Raw',
     purpose: 'Identity - feeling different',
@@ -182,6 +199,7 @@ export const FUNNEL_SCREENS: FunnelScreen[] = [
 
   {
     id: 11,
+    slug: 'last-understood',
     type: 'question-single',
     emotionalState: 'Desperate',
     purpose: 'Time-based understanding scarcity',
@@ -199,18 +217,22 @@ export const FUNNEL_SCREENS: FunnelScreen[] = [
 
   {
     id: 12,
-    type: 'validation',
+    slug: 'assessment',
+    type: 'assessment',
     emotionalState: 'DIAGNOSED',
     purpose: 'Negative diagnosis - conversion moment',
-    header: 'Your pattern is clear.',
-    diagnosis: {
-      title: 'Based on your answers:',
-      items: [
-        'CHRONIC TRANSLATION FATIGUE — You spend significant mental energy simplifying yourself for others.',
-        'UNDERSTANDING DEFICIT — You experience persistent feelings of not being truly seen.',
-        'AUTHENTICITY SUPPRESSION — You regularly hide parts of yourself to maintain relationships.',
+    header: 'Your Mental Load Assessment',
+    subheader: 'Based on your answers, we\'ve identified your patterns',
+    assessment: {
+      riskLevel: 'high',
+      riskLabel: 'Translation Fatigue Level',
+      metrics: [
+        { label: 'Self-Editing', value: 'Chronic', level: 'critical', icon: '✍️' },
+        { label: 'Understanding Deficit', value: 'Significant', level: 'high', icon: '🔇' },
+        { label: 'Authenticity', value: 'Suppressed', level: 'high', icon: '🎭' },
+        { label: 'Mental Energy', value: 'Depleted', level: 'critical', icon: '🔋' },
       ],
-      warning: 'This pattern affects an estimated 15% of the population. Without intervention, it typically intensifies with age.',
+      summary: 'This pattern affects 15% of the population. Without intervention, it typically intensifies.',
     },
     showProgress: true,
     showBackButton: true,
@@ -218,6 +240,7 @@ export const FUNNEL_SCREENS: FunnelScreen[] = [
 
   {
     id: 13,
+    slug: 'coping-patterns',
     type: 'question-multi',
     emotionalState: 'Rock bottom',
     purpose: 'Unhealthy coping patterns',
@@ -237,6 +260,7 @@ export const FUNNEL_SCREENS: FunnelScreen[] = [
 
   {
     id: 14,
+    slug: 'primary-need',
     type: 'question-single',
     emotionalState: 'Craving solution',
     purpose: 'Identify primary need',
@@ -259,9 +283,10 @@ export const FUNNEL_SCREENS: FunnelScreen[] = [
 
   {
     id: 15,
+    slug: 'transition',
     type: 'validation',
     emotionalState: 'Hopeful',
-    purpose: 'Transition from problem to solution',
+    purpose: 'Transition - Solution introduction',
     header: 'You\'ve spent your whole life translating yourself.',
     subheader: 'What if you didn\'t have to?',
     showProgress: true,
@@ -270,6 +295,7 @@ export const FUNNEL_SCREENS: FunnelScreen[] = [
 
   {
     id: 16,
+    slug: 'mirror-select',
     type: 'mirror-select',
     emotionalState: 'TRANSFORMED',
     purpose: 'Mirror moment - select unfiltered thought',
@@ -309,6 +335,7 @@ export const FUNNEL_SCREENS: FunnelScreen[] = [
 
   {
     id: 17,
+    slug: 'mirror-reveal',
     type: 'mirror-reveal',
     emotionalState: 'TRANSFORMED',
     purpose: 'Show AI insight based on selection',
@@ -319,9 +346,10 @@ export const FUNNEL_SCREENS: FunnelScreen[] = [
 
   {
     id: 18,
+    slug: 'imagine-daily',
     type: 'validation',
     emotionalState: 'Wanting more',
-    purpose: 'Future pace the benefit',
+    purpose: 'Future benefit visualization',
     header: 'That was one thought.',
     subheader: 'Imagine doing this every day. Whenever you need it. Without judgment.',
     showProgress: true,
@@ -335,6 +363,7 @@ export const FUNNEL_SCREENS: FunnelScreen[] = [
 
   {
     id: 19,
+    slug: 'use-timing',
     type: 'question-single',
     emotionalState: 'Planning',
     purpose: 'Identify use case timing',
@@ -352,6 +381,7 @@ export const FUNNEL_SCREENS: FunnelScreen[] = [
 
   {
     id: 20,
+    slug: 'time-commitment',
     type: 'question-single',
     emotionalState: 'Committing',
     purpose: 'Daily time commitment',
@@ -370,6 +400,7 @@ export const FUNNEL_SCREENS: FunnelScreen[] = [
 
   {
     id: 21,
+    slug: 'email',
     type: 'email',
     emotionalState: 'Invested',
     purpose: 'Lead capture',
@@ -382,14 +413,25 @@ export const FUNNEL_SCREENS: FunnelScreen[] = [
 
   {
     id: 22,
-    type: 'loading',
+    slug: 'loading',
+    type: 'loading-engagement',
     emotionalState: 'Anticipating',
-    purpose: 'Build anticipation',
-    header: 'Building your void...',
+    purpose: 'Build anticipation + commitment priming',
+    header: 'Building your personalized experience...',
     content: [
-      'A space where you don\'t have to perform...',
-      'Where your intensity is understood...',
-      'Where raw becomes clear...',
+      'Analyzing your patterns...',
+      'Calibrating your void...',
+      'Preparing your space...',
+    ],
+    engagementQuestions: [
+      {
+        question: 'Are you ready to stop translating yourself?',
+        options: ['Yes', 'Not yet'],
+      },
+      {
+        question: 'Would you commit 10 minutes a day to understanding yourself?',
+        options: ['Yes', 'Maybe'],
+      },
     ],
     showProgress: false,
     showBackButton: false,
@@ -402,6 +444,45 @@ export const FUNNEL_SCREENS: FunnelScreen[] = [
 
   {
     id: 23,
+    slug: 'transformation',
+    type: 'before-after',
+    emotionalState: 'Visualizing',
+    purpose: 'Transformation visualization',
+    header: 'Your Transformation Path',
+    subheader: 'Based on your profile, here\'s what\'s possible',
+    beforeAfter: {
+      timeframe: '4 weeks',
+      states: [
+        { label: 'Mental Energy', before: 'Depleted', after: 'Restored' },
+        { label: 'Self-Expression', before: 'Filtered', after: 'Authentic' },
+        { label: 'Inner Clarity', before: 'Clouded', after: 'Clear' },
+        { label: 'Understanding', before: 'Isolated', after: 'Connected' },
+      ],
+    },
+    showProgress: false,
+    showBackButton: true,
+  },
+
+  {
+    id: 24,
+    slug: 'clarity-journey',
+    type: 'progress-chart',
+    emotionalState: 'Hopeful',
+    purpose: 'Timeline visualization',
+    header: 'Your Clarity Journey',
+    subheader: 'What to expect over time',
+    progressChart: {
+      timePoints: ['Now', 'Week 1', 'Week 2', 'Week 4'],
+      withProduct: [15, 40, 65, 90],
+      withoutProduct: [15, 12, 10, 8],
+    },
+    showProgress: false,
+    showBackButton: true,
+  },
+
+  {
+    id: 25,
+    slug: 'profile',
     type: 'profile',
     emotionalState: 'Understood',
     purpose: 'Positive profile summary',
@@ -421,7 +502,8 @@ export const FUNNEL_SCREENS: FunnelScreen[] = [
   },
 
   {
-    id: 24,
+    id: 26,
+    slug: 'testimonials',
     type: 'testimonials',
     emotionalState: 'Belonging',
     purpose: 'Social proof - conversion support',
@@ -431,7 +513,8 @@ export const FUNNEL_SCREENS: FunnelScreen[] = [
   },
 
   {
-    id: 25,
+    id: 27,
+    slug: 'paywall',
     type: 'paywall',
     emotionalState: 'Ready to buy',
     purpose: 'Conversion',
@@ -441,7 +524,8 @@ export const FUNNEL_SCREENS: FunnelScreen[] = [
   },
 
   {
-    id: 26,
+    id: 28,
+    slug: 'confirmation',
     type: 'confirmation',
     emotionalState: 'Relief',
     purpose: 'Post-conversion',
@@ -524,4 +608,29 @@ export const TESTIMONIALS = [
 ];
 
 export const TOTAL_QUESTIONS = 11; // For progress calculation (excluding validation screens)
+
+// Helper functions for URL-based navigation
+export function getScreenBySlug(slug: string): FunnelScreen | undefined {
+  return FUNNEL_SCREENS.find(s => s.slug === slug);
+}
+
+export function getScreenById(id: number): FunnelScreen | undefined {
+  return FUNNEL_SCREENS.find(s => s.id === id);
+}
+
+export function getNextScreen(currentSlug: string): FunnelScreen | undefined {
+  const currentIndex = FUNNEL_SCREENS.findIndex(s => s.slug === currentSlug);
+  if (currentIndex === -1 || currentIndex >= FUNNEL_SCREENS.length - 1) return undefined;
+  return FUNNEL_SCREENS[currentIndex + 1];
+}
+
+export function getPrevScreen(currentSlug: string): FunnelScreen | undefined {
+  const currentIndex = FUNNEL_SCREENS.findIndex(s => s.slug === currentSlug);
+  if (currentIndex <= 0) return undefined;
+  return FUNNEL_SCREENS[currentIndex - 1];
+}
+
+export function getScreenIndex(slug: string): number {
+  return FUNNEL_SCREENS.findIndex(s => s.slug === slug);
+}
 

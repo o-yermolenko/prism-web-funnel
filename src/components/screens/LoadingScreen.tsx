@@ -1,8 +1,8 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useFunnelStore } from '@/lib/store';
+import { useFunnelNavigation } from '@/hooks/useFunnelNavigation';
 import { FunnelScreen } from '@/types/funnel';
 
 interface LoadingScreenProps {
@@ -10,7 +10,7 @@ interface LoadingScreenProps {
 }
 
 export default function LoadingScreen({ screen }: LoadingScreenProps) {
-  const { nextScreen } = useFunnelStore();
+  const { goToNext } = useFunnelNavigation();
   const [progress, setProgress] = useState(0);
   const [messageIndex, setMessageIndex] = useState(0);
   
@@ -19,6 +19,10 @@ export default function LoadingScreen({ screen }: LoadingScreenProps) {
     'Where your intensity is understood...',
     'Where raw becomes clear...',
   ];
+
+  const handleAdvance = useCallback(() => {
+    goToNext();
+  }, [goToNext]);
 
   useEffect(() => {
     // Progress animation
@@ -39,7 +43,7 @@ export default function LoadingScreen({ screen }: LoadingScreenProps) {
 
     // Auto-advance after loading completes
     const advanceTimeout = setTimeout(() => {
-      nextScreen();
+      handleAdvance();
     }, 5000);
 
     return () => {
@@ -47,7 +51,7 @@ export default function LoadingScreen({ screen }: LoadingScreenProps) {
       clearInterval(messageInterval);
       clearTimeout(advanceTimeout);
     };
-  }, [messages.length, nextScreen]);
+  }, [messages.length, handleAdvance]);
 
   return (
     <div className="min-h-screen bg-prism-black flex flex-col items-center justify-center px-6">
