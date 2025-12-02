@@ -8,11 +8,11 @@ interface FrequencyWaveProps {
 }
 
 export default function FrequencyWave({ position = 'top' }: FrequencyWaveProps) {
-  const { getProgress, currentScreen } = useFunnelStore();
+  const { getProgress, currentSlug } = useFunnelStore();
   const progress = getProgress();
   const [time, setTime] = useState(0);
   const [transitionAmplitude, setTransitionAmplitude] = useState(1);
-  const prevScreenRef = useRef(currentScreen);
+  const prevScreenRef = useRef(currentSlug);
   
   // Slow, deliberate animation
   useEffect(() => {
@@ -24,9 +24,9 @@ export default function FrequencyWave({ position = 'top' }: FrequencyWaveProps) 
   
   // Gentle "settling" transition when screen changes
   useEffect(() => {
-    if (currentScreen !== prevScreenRef.current) {
+    if (currentSlug !== prevScreenRef.current) {
       setTransitionAmplitude(1.4); // Gentle surge
-      prevScreenRef.current = currentScreen;
+      prevScreenRef.current = currentSlug;
       
       // Settle back slowly
       const timeout = setTimeout(() => {
@@ -35,7 +35,7 @@ export default function FrequencyWave({ position = 'top' }: FrequencyWaveProps) 
       
       return () => clearTimeout(timeout);
     }
-  }, [currentScreen]);
+  }, [currentSlug]);
   
   const generateWavePath = (width: number, height: number) => {
     const points: string[] = [];
