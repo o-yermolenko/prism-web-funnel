@@ -73,9 +73,11 @@ export default function FunnelLayout({
         </div>
       )}
 
-      {/* Main content - proper spacing below progress bar on mobile */}
-      <main className="flex-1 flex flex-col items-center px-4 sm:px-6 pt-28 sm:pt-24 pb-8 sm:pb-12 sm:justify-center">
-        <div className="w-full flex flex-col items-center sm:justify-center">
+      {/* Main content - conditional padding based on progress bar visibility */}
+      <main className={`flex-1 flex flex-col items-center px-4 sm:px-6 pb-8 sm:pb-12 ${
+        showProgress ? 'pt-28 sm:pt-24' : 'pt-0'
+      } ${showProgress ? 'sm:justify-center' : ''}`}>
+        <div className="w-full flex flex-col items-center">
           {children}
         </div>
       </main>

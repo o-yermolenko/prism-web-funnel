@@ -42,7 +42,7 @@ export default function GenderScreen({ screen }: GenderScreenProps) {
 
   return (
     <FunnelLayout showProgress={false} showBackButton={false}>
-      <div className="relative w-full max-w-md mx-auto px-4 py-6 flex flex-col min-h-[calc(100vh-2rem)]">
+      <div className="relative w-full max-w-md mx-auto px-4 pt-2 pb-6 flex flex-col min-h-screen">
         
         {/* Top row: Badge + Online count */}
           <motion.div
