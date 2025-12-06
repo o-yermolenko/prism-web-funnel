@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useFunnelNavigation } from '@/hooks/useFunnelNavigation';
 import FunnelLayout from '../FunnelLayout';
 import { FunnelScreen } from '@/types/funnel';
@@ -10,19 +10,10 @@ interface GenderScreenProps {
   screen: FunnelScreen;
 }
 
-// Rotating unfiltered thoughts - product demo + social proof
-const UNFILTERED_THOUGHTS = [
-  "I'm exhausted from pretending to be okay",
-  "I wish someone would finally see the real me",
-  "I have people around me but I still feel alone",
-  "I'm tired of translating myself for everyone",
-];
-
 export default function GenderScreen({ screen }: GenderScreenProps) {
   const { saveAnswerAndNextDelayed } = useFunnelNavigation();
   const [selected, setSelected] = useState<string | null>(null);
   const [onlineCount, setOnlineCount] = useState(148);
-  const [currentThought, setCurrentThought] = useState(0);
 
   // Simulate live activity
   useEffect(() => {
@@ -32,14 +23,6 @@ export default function GenderScreen({ screen }: GenderScreenProps) {
         return Math.max(142, Math.min(158, prev + change));
       });
     }, 3000);
-    return () => clearInterval(interval);
-  }, []);
-
-  // Rotate through unfiltered thoughts
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentThought(prev => (prev + 1) % UNFILTERED_THOUGHTS.length);
-    }, 4500);
     return () => clearInterval(interval);
   }, []);
 
@@ -82,7 +65,7 @@ export default function GenderScreen({ screen }: GenderScreenProps) {
       <div className="relative w-full max-w-lg mx-auto px-4 sm:px-6 py-6 sm:py-8 flex flex-col min-h-screen">
         
         {/* Top row: Badge + Live count */}
-        <motion.div
+          <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.4 }}
@@ -107,38 +90,30 @@ export default function GenderScreen({ screen }: GenderScreenProps) {
               <span className="text-prism-success">{onlineCount}</span> online
             </span>
           </div>
-        </motion.div>
+          </motion.div>
 
         {/* Main content - centered */}
         <div className="flex-1 flex flex-col justify-center">
           
-          {/* Rotating unfiltered thoughts - CREATES LIFE */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+          {/* Testimonial - social proof above headline */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="mb-6"
+            className="mb-6 text-center"
           >
-            <div className="border border-prism-border/50 px-4 py-3 mx-auto max-w-sm">
-              <AnimatePresence mode="wait">
-                <motion.p
-                  key={currentThought}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.5 }}
-                  className="font-raw text-sm text-prism-secondary text-center leading-relaxed"
-                >
-                  "{UNFILTERED_THOUGHTS[currentThought]}"
-                </motion.p>
-              </AnimatePresence>
-            </div>
-          </motion.div>
+            <p className="text-prism-secondary text-sm italic mb-1">
+              "Finally understood why I felt so stuck"
+            </p>
+            <p className="font-raw text-xs text-prism-muted tracking-badge">
+              — Sarah, 34 · <span className="text-prism-success">Just now</span>
+            </p>
+        </motion.div>
 
           {/* Headline with subtle glow */}
-          <motion.h1
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
+        <motion.h1
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-3xl sm:text-4xl lg:text-5xl font-refined font-medium text-prism-white text-center mb-4 tracking-tight leading-tight"
           >
@@ -157,7 +132,7 @@ export default function GenderScreen({ screen }: GenderScreenProps) {
             >
               Finally Unfiltered.
             </motion.span>
-          </motion.h1>
+        </motion.h1>
 
           {/* Subhead - action-oriented */}
           <motion.p
@@ -170,19 +145,19 @@ export default function GenderScreen({ screen }: GenderScreenProps) {
           </motion.p>
 
           {/* Gender Cards - Optimized for mobile (smaller aspect ratio) */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.4 }}
-            className="flex flex-row gap-3 justify-center mb-6 w-full px-2"
-          >
-            {/* Male Card */}
-            <motion.button
-              onClick={() => handleSelect('male')}
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
+            className="flex flex-row gap-3 justify-center mb-8 w-full px-2"
+        >
+          {/* Male Card */}
+          <motion.button
+            onClick={() => handleSelect('male')}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
               className={`group relative flex-1 aspect-[4/5] sm:aspect-[3/4] max-w-[160px] sm:max-w-[180px] rounded-lg transition-all duration-300 border overflow-hidden ${
-                selected === 'male'
+              selected === 'male'
                   ? 'border-prism-electric-blue bg-prism-surface shadow-[0_0_30px_rgba(0,102,255,0.25)]'
                   : 'border-prism-border hover:border-prism-electric-blue hover:shadow-[0_0_20px_rgba(0,102,255,0.15)] bg-prism-surface/50'
               }`}
@@ -219,15 +194,15 @@ export default function GenderScreen({ screen }: GenderScreenProps) {
                   </svg>
                 </motion.div>
               </div>
-            </motion.button>
+          </motion.button>
 
-            {/* Female Card */}
-            <motion.button
-              onClick={() => handleSelect('female')}
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
+          {/* Female Card */}
+          <motion.button
+            onClick={() => handleSelect('female')}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
               className={`group relative flex-1 aspect-[4/5] sm:aspect-[3/4] max-w-[160px] sm:max-w-[180px] rounded-lg transition-all duration-300 border overflow-hidden ${
-                selected === 'female'
+              selected === 'female'
                   ? 'border-prism-electric-blue bg-prism-surface shadow-[0_0_30px_rgba(0,102,255,0.25)]'
                   : 'border-prism-border hover:border-prism-electric-blue hover:shadow-[0_0_20px_rgba(0,102,255,0.15)] bg-prism-surface/50'
               }`}
@@ -264,30 +239,15 @@ export default function GenderScreen({ screen }: GenderScreenProps) {
                   </svg>
                 </motion.div>
               </div>
-            </motion.button>
-          </motion.div>
-
-          {/* Testimonial with recency - feels LIVE */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.4, delay: 0.5 }}
-            className="border border-prism-border/50 p-3 sm:p-4 mb-4 sm:mb-6 max-w-sm mx-auto"
-          >
-            <p className="text-prism-secondary text-sm text-center italic mb-2">
-              "Finally understood why I felt so stuck"
-            </p>
-            <p className="font-raw text-xs text-prism-muted text-center tracking-badge">
-              — Sarah, 34 · <span className="text-prism-success">Just now</span>
-            </p>
-          </motion.div>
+          </motion.button>
+        </motion.div>
 
           {/* Trust badges */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.4, delay: 0.55 }}
-            className="text-center mb-4"
+            transition={{ duration: 0.4, delay: 0.5 }}
+            className="text-center mb-3"
           >
             <span className="font-raw text-xs text-prism-muted tracking-badge">
               Free · Private · 3 min
@@ -298,13 +258,13 @@ export default function GenderScreen({ screen }: GenderScreenProps) {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.4, delay: 0.6 }}
+            transition={{ duration: 0.4, delay: 0.55 }}
             className="text-center"
           >
             <span className="font-raw text-xs text-prism-muted tracking-badge">
               <span className="text-prism-secondary">2,723</span> this week
             </span>
-          </motion.div>
+        </motion.div>
         </div>
       </div>
     </FunnelLayout>
