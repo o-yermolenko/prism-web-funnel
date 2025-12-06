@@ -130,18 +130,41 @@ export default function ValidationScreen({ screen }: ValidationScreenProps) {
             {screen.purpose?.includes('Transition') && (
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
                 {[
-                  { icon: '🎯', text: 'Clarity on demand' },
-                  { icon: '🔓', text: 'No more translating' },
-                  { icon: '⚡', text: 'Instant understanding' },
+                  { 
+                    icon: (
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <circle cx="12" cy="12" r="10" />
+                        <circle cx="12" cy="12" r="3" fill="currentColor" />
+                      </svg>
+                    ), 
+                    text: 'Clarity on demand' 
+                  },
+                  { 
+                    icon: (
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <rect x="5" y="11" width="14" height="10" rx="2" />
+                        <path d="M8 11V7a4 4 0 018 0" strokeLinecap="round" />
+                      </svg>
+                    ), 
+                    text: 'No more translating' 
+                  },
+                  { 
+                    icon: (
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+                      </svg>
+                    ), 
+                    text: 'Instant understanding' 
+                  },
                 ].map((feature, i) => (
                   <motion.div
                     key={feature.text}
                     initial={{ opacity: 0, y: 15 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.4, delay: 0.4 + i * 0.1 }}
-                    className="p-4 bg-prism-surface border border-white/5 rounded-xl"
+                    className="p-4 bg-prism-surface border border-white/5 rounded-xl text-center"
                   >
-                    <span className="text-2xl mb-2 block">{feature.icon}</span>
+                    <div className="text-prism-cyan mb-3 flex justify-center">{feature.icon}</div>
                     <span className="text-sm text-prism-muted-light">{feature.text}</span>
                   </motion.div>
                 ))}

@@ -15,12 +15,15 @@ export type ScreenType =
   | 'testimonials'
   | 'paywall'
   | 'confirmation'
-  // New LTV-maximizing screen types
+  // LTV-maximizing screen types
   | 'social-proof'
   | 'statistics-visual'
   | 'assessment'
   | 'before-after'
-  | 'progress-chart';
+  | 'progress-chart'
+  // Pattern interrupt screens
+  | 'interstitial'
+  | 'readiness-score';
 
 export interface FunnelOption {
   id: string;
@@ -95,6 +98,16 @@ export interface FunnelScreen {
     timePoints: string[];
     withProduct: number[];
     withoutProduct: number[];
+  };
+  // Readiness score (Coursiv pattern)
+  readinessScore?: {
+    score: number;
+    label: string;
+    insight: string;
+    factors: {
+      label: string;
+      value: number;
+    }[];
   };
   autoAdvance?: boolean;
   showProgress?: boolean;

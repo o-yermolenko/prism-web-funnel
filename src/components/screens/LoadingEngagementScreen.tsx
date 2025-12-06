@@ -18,14 +18,21 @@ export default function LoadingEngagementScreen({ screen }: LoadingEngagementScr
   const [showQuestion, setShowQuestion] = useState(false);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [questionAnswered, setQuestionAnswered] = useState(false);
+  const [currentTestimonialIndex, setCurrentTestimonialIndex] = useState(0);
 
   const stages = screen.content || [
-    'Analyzing your patterns...',
-    'Calibrating your experience...',
-    'Preparing your space...',
+    'Analyzing your thought patterns...',
+    'Identifying your unique frequency...',
+    'Mapping your mental landscape...',
+    'Calibrating your void...',
+    'Preparing your personalized profile...',
   ];
 
   const questions = screen.engagementQuestions || [];
+  
+  // Loading duration: 20 seconds (pattern says 15-30s)
+  const TOTAL_DURATION = 20000;
+  const PROGRESS_INTERVAL = TOTAL_DURATION / 100;
 
   const handleQuestionAnswer = useCallback(() => {
     setQuestionAnswered(true);
@@ -42,7 +49,7 @@ export default function LoadingEngagementScreen({ screen }: LoadingEngagementScr
   }, [currentQuestion, questions.length, goToNext]);
 
   useEffect(() => {
-    // Progress animation
+    // Progress animation - slower (20 seconds total)
     const progressInterval = setInterval(() => {
       setProgress(prev => {
         if (prev >= 100) {
@@ -51,28 +58,35 @@ export default function LoadingEngagementScreen({ screen }: LoadingEngagementScr
         }
         return prev + 1;
       });
-    }, 50);
+    }, PROGRESS_INTERVAL);
 
-    // Stage changes
+    // Stage changes - spread across the duration
+    const stageInterval = TOTAL_DURATION / stages.length;
     const stageTimers = stages.map((_, index) => {
       return setTimeout(() => {
         setCurrentStage(index);
-      }, (index + 1) * 1500);
+      }, index * stageInterval);
     });
 
-    // Show first question after initial loading
+    // Show first question after initial loading (5 seconds)
     const questionTimer = setTimeout(() => {
       if (questions.length > 0) {
         setShowQuestion(true);
       }
-    }, 3000);
+    }, 5000);
+    
+    // Testimonial rotation - every 4 seconds
+    const testimonialInterval = setInterval(() => {
+      setCurrentTestimonialIndex(prev => (prev + 1) % TESTIMONIALS.length);
+    }, 4000);
 
     return () => {
       clearInterval(progressInterval);
+      clearInterval(testimonialInterval);
       stageTimers.forEach(clearTimeout);
       clearTimeout(questionTimer);
     };
-  }, [stages.length, questions.length]);
+  }, [stages.length, questions.length, PROGRESS_INTERVAL]);
 
   // Auto-advance if no questions or all done
   useEffect(() => {
@@ -81,7 +95,7 @@ export default function LoadingEngagementScreen({ screen }: LoadingEngagementScr
     }
   }, [progress, questions.length, goToNext]);
 
-  const currentTestimonial = TESTIMONIALS[currentQuestion % TESTIMONIALS.length];
+  const currentTestimonial = TESTIMONIALS[currentTestimonialIndex];
 
   return (
     <FunnelLayout showProgress={false} showBackButton={false}>
@@ -185,13 +199,16 @@ export default function LoadingEngagementScreen({ screen }: LoadingEngagementScr
           )}
         </AnimatePresence>
 
-        {/* Testimonial */}
+        {/* Testimonial rotator */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.5 }}
           className="p-5 bg-prism-deep border border-white/5 rounded-2xl"
         >
+          <p className="text-xs text-prism-muted uppercase tracking-wider mb-3">
+            While we prepare your results...
+          </p>
           <div className="flex items-center justify-center gap-1 mb-3">
             {[1, 2, 3, 4, 5].map((star) => (
               <svg key={star} width="16" height="16" viewBox="0 0 24 24" fill="#ffd000">
@@ -199,10 +216,20 @@ export default function LoadingEngagementScreen({ screen }: LoadingEngagementScr
               </svg>
             ))}
           </div>
-          <p className="text-prism-white italic mb-3">"{currentTestimonial.quote}"</p>
-          <p className="text-sm text-prism-muted-light">
-            — {currentTestimonial.name}, {currentTestimonial.age}
-          </p>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentTestimonialIndex}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.3 }}
+            >
+              <p className="text-prism-white italic mb-3">"{currentTestimonial.quote}"</p>
+              <p className="text-sm text-prism-muted-light">
+                — {currentTestimonial.name}, {currentTestimonial.age}
+              </p>
+            </motion.div>
+          </AnimatePresence>
         </motion.div>
       </div>
     </FunnelLayout>

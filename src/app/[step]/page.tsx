@@ -25,6 +25,8 @@ import {
   BeforeAfterScreen,
   ProgressChartScreen,
   LoadingEngagementScreen,
+  InterstitialScreen,
+  ReadinessScoreScreen,
 } from '@/components/screens';
 
 export default function StepPage() {
@@ -114,6 +116,12 @@ export default function StepPage() {
       
       case 'progress-chart':
         return <ProgressChartScreen screen={screen} />;
+      
+      case 'interstitial':
+        return <InterstitialScreen screen={screen} />;
+      
+      case 'readiness-score':
+        return <ReadinessScoreScreen screen={screen} />;
       
       default:
         return (

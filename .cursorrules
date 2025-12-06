@@ -1,0 +1,124 @@
+# PRISM Project Context
+
+This is **PRISM** - an AI tool for intense minds who feel exhausted translating themselves for others.
+
+**Tagline:** "Your mind. Finally unfiltered."
+
+**Metaphor:** User = raw light → PRISM = the interface → Output = refracted, understood
+
+---
+
+## Design DNA
+
+### Colors (The Void & The Light)
+- Background: Always true black `#000000`
+- Surface elevation: `#050508`, `#0a0a0f`
+- Primary text: `#ffffff` (high contrast)
+- Secondary text: `#888888`
+- Muted text: `#666666`
+- Accent: Electric blue `#0066ff` (use sparingly)
+- Accent glow: `rgba(0, 102, 255, 0.4)`
+
+### Typography (Chaos In, Clarity Out)
+- User input: Monospace (JetBrains Mono, SF Mono)
+- AI output & UI: Sans-serif (Inter, SF Pro)
+- The contrast between these IS the product story
+
+### Motion (Slow and Deliberate)
+- Standard: 300ms ease-in-out
+- Page transitions: 500ms
+- AI thinking pause: 800ms
+- Easing: `cubic-bezier(0.4, 0, 0.2, 1)`
+- NEVER bouncy, springy, or playful
+
+### Components
+- Border radius: 0-4px (sharp, not rounded)
+- CTAs: Gradient from `#0066ff` to `#00d4ff` with glow
+- Option cards: Subtle border, electric blue on select
+- Progress: Frequency wave (not standard bar)
+
+---
+
+## Voice & Copy
+
+**Be:** Direct, Knowing, Private, Intense, Premium
+**Never:** Friendly, Cheerful, Social, Soft, Accessible
+
+Good copy examples:
+- "You're not pretending. You're surviving."
+- "Discover why you feel exhausting to be around"
+- "The exhaustion isn't weakness—it's the cost of performing"
+
+Bad copy examples (NEVER use):
+- "Let's work together!" ❌
+- "You've got this! 💪" ❌
+- Emojis in serious copy ❌
+- Wellness/therapy language ❌
+
+---
+
+## Non-Negotiables
+
+### ALWAYS ✅
+- True black (#000000) backgrounds
+- Monospace for user input, sans-serif for AI output
+- Slow animations (300-500ms)
+- Emptiness is the feature - generous whitespace
+- Single focus per screen
+- Electric blue only for key moments
+- Sharp corners (0-4px radius)
+
+### NEVER ❌
+- Warm colors (orange, coral, pink, cream)
+- Chat bubbles (this is NOT a chatbot)
+- Gamification (badges, streaks, points)
+- Bouncy/playful animations
+- Busy dashboards or clutter
+- Soft, rounded, "friendly" UI
+- Nature imagery or wellness aesthetics
+- Dark gray instead of true black
+
+---
+
+## Target User
+
+People who:
+- Feel exhausted from editing themselves in every conversation
+- Think faster and more chaotically than those around them
+- Feel lonely despite having people in their life
+- Suspect they're different—maybe deeper, maybe too intense
+- Want a space where they don't have to perform
+
+**They're not looking for a friend. They're looking for a witness.**
+
+---
+
+## Quick Test
+
+Before implementing anything, ask:
+1. Does this feel like a void that listens?
+2. Is there enough emptiness?
+3. Would the user feel safe being unfiltered here?
+4. Is this premium and intense, not friendly and soft?
+
+---
+
+## Key Files
+
+### PRISM-Specific (docs/brand/)
+- `PRISM_DESIGN_BRIEF.md` - Full design system & rationale
+- `PRISM_DEV_GUIDE.md` - Implementation cheatsheet (CSS vars, Tailwind classes)
+- `PRISM_COMPONENTS.md` - React component examples
+- `design-tokens.json` - Machine-readable tokens
+
+### Universal Templates (docs/patterns/)
+- `PRODUCT_BRIEF_PLAYBOOK.md` - Framework for analyzing any product
+- `UNIVERSAL_FUNNEL_DESIGN_SYSTEM.md` - Generic funnel design patterns
+- `UNIVERSAL_FUNNEL_PLAYBOOK.md` - Funnel strategy & psychology
+
+### Other
+- `QUICK_START.md` - 3-minute developer onboarding
+- `docs/research/` - Competitor analysis (Copymind, Coursiv, Liven)
+
+When in doubt about design decisions, reference these files.
+

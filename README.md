@@ -1,43 +1,86 @@
-# The Prism
+# PRISM Web Funnel
 
-A modern web funnel application for lead generation and conversion optimization.
+> *"Your mind. Finally unfiltered."*
 
-## Overview
+A web funnel for PRISM - an AI tool for intense minds who feel exhausted translating themselves for others.
 
-The Prism is a web funnel platform designed to guide visitors through a strategic conversion journey, capturing leads and optimizing user experience at every step.
+---
+
+## Quick Start
+
+1. **Read** `QUICK_START.md` for 3-minute onboarding
+2. **Reference** `docs/brand/PRISM_DESIGN_BRIEF.md` for the full design system
+3. **Run** the development server (see below)
+
+---
 
 ## Tech Stack
 
 - **Framework**: Next.js 14+ (App Router)
 - **Language**: TypeScript
 - **Styling**: Tailwind CSS
-- **State Management**: React Context / Zustand
-- **Forms**: React Hook Form
-- **Analytics**: Custom event tracking
-- **Deployment**: Vercel / Custom hosting
+- **State Management**: Zustand
+- **Deployment**: Vercel
+
+---
 
 ## Project Structure
 
 ```
-├── public/              # Static assets
+/prism-web/
+│
+├── .cursorrules              # AI context (auto-loaded by Cursor)
+├── README.md                 # This file
+├── QUICK_START.md            # 3-minute developer onboarding
+│
+├── docs/
+│   ├── brand/                # PRISM-specific documentation
+│   │   ├── PRISM_DESIGN_BRIEF.md    # Full design system & rationale
+│   │   ├── PRISM_DEV_GUIDE.md       # Implementation cheatsheet
+│   │   ├── PRISM_COMPONENTS.md      # React component examples
+│   │   └── design-tokens.json        # Machine-readable tokens
+│   │
+│   ├── patterns/             # Universal templates (reusable)
+│   │   ├── PRODUCT_BRIEF_PLAYBOOK.md     # How to analyze any product
+│   │   ├── UNIVERSAL_FUNNEL_DESIGN_SYSTEM.md
+│   │   └── UNIVERSAL_FUNNEL_PLAYBOOK.md
+│   │
+│   └── research/             # Competitor analysis
+│       ├── copymind/
+│       ├── coursiv/
+│       └── liven/
+│
 ├── src/
-│   ├── app/            # Next.js app router pages
-│   ├── components/     # Reusable UI components
-│   ├── lib/           # Utility functions and helpers
-│   ├── hooks/         # Custom React hooks
-│   ├── types/         # TypeScript type definitions
-│   └── styles/        # Global styles
-├── config/            # Configuration files
-└── docs/             # Documentation
+│   ├── app/                  # Next.js app router pages
+│   │   ├── [step]/           # Dynamic funnel steps
+│   │   ├── globals.css       # Global styles
+│   │   ├── layout.tsx        # Root layout
+│   │   └── page.tsx          # Landing page
+│   │
+│   ├── components/           # UI components
+│   │   ├── screens/          # Full-page screen components
+│   │   ├── DecryptedText.tsx
+│   │   ├── FrequencyWave.tsx
+│   │   ├── FunnelLayout.tsx
+│   │   └── ProgressLine.tsx
+│   │
+│   ├── hooks/                # Custom React hooks
+│   ├── lib/                  # Utilities & store
+│   └── types/                # TypeScript definitions
+│
+├── public/                   # Static assets
+│
+└── [config files]            # package.json, tailwind.config.ts, etc.
 ```
+
+---
 
 ## Getting Started
 
 ### Prerequisites
 
-- Node.js 18+ 
+- Node.js 18+
 - npm or yarn
-- Git
 
 ### Installation
 
@@ -50,58 +93,40 @@ npm run dev
 
 # Build for production
 npm run build
-
-# Start production server
-npm start
 ```
 
-### Development
+Open [http://localhost:3000](http://localhost:3000) to view the funnel.
 
-```bash
-npm run dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) to view the funnel in your browser.
+## Design System
 
-## Features
+PRISM has a distinct aesthetic: **dark, quiet, intense, private.**
 
-- 🎯 Multi-step funnel flows
-- 📊 Built-in analytics tracking
-- 🎨 Customizable design system
-- 📱 Fully responsive
-- ⚡ Optimized performance
-- 🔒 Data validation and security
-- 🧪 A/B testing ready
+| Principle | Implementation |
+|-----------|----------------|
+| True black backgrounds | `#000000` always |
+| Monospace for user input | JetBrains Mono |
+| Sans-serif for AI output | Inter |
+| Slow animations | 300-500ms |
+| Emptiness is the feature | Generous whitespace |
 
-## Funnel Structure
+See `docs/brand/PRISM_DESIGN_BRIEF.md` for the complete design system.
 
-1. **Landing Page** - Initial engagement
-2. **Lead Capture** - Information collection
-3. **Value Proposition** - Product/service showcase
-4. **Social Proof** - Testimonials and trust building
-5. **Call to Action** - Final conversion step
-6. **Thank You** - Confirmation and next steps
+---
 
-## Environment Variables
+## Key Documentation
 
-Create a `.env.local` file in the root directory:
+| Document | Purpose |
+|----------|---------|
+| `QUICK_START.md` | 3-minute onboarding |
+| `docs/brand/PRISM_DESIGN_BRIEF.md` | Full design system & rationale |
+| `docs/brand/PRISM_DEV_GUIDE.md` | CSS vars, Tailwind classes, code snippets |
+| `docs/brand/PRISM_COMPONENTS.md` | React component examples |
+| `docs/patterns/` | Universal templates (reusable for any product) |
+| `docs/research/` | Competitor analysis |
 
-```env
-# API Configuration
-NEXT_PUBLIC_API_URL=
-NEXT_PUBLIC_ANALYTICS_ID=
-
-# Email Configuration
-EMAIL_API_KEY=
-EMAIL_FROM=
-
-# Database (if needed)
-DATABASE_URL=
-```
-
-## Contributing
-
-This is a private project. Contact the project owner for contribution guidelines.
+---
 
 ## License
 
@@ -109,6 +134,4 @@ Proprietary - All rights reserved
 
 ---
 
-**Created**: November 2025
-**Last Updated**: November 2025
-
+*The design doesn't try to be friendly. It tries to be worthy of their unfiltered mind.*

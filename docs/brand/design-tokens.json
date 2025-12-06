@@ -1,0 +1,285 @@
+{
+  "$schema": "https://design-tokens.org/schema",
+  "meta": {
+    "name": "PRISM Design Tokens",
+    "version": "2.0.0",
+    "description": "Machine-readable design tokens for PRISM - Your mind. Finally unfiltered."
+  },
+
+  "brand": {
+    "name": "PRISM",
+    "tagline": "Your mind. Finally unfiltered.",
+    "essence": "A quiet void where the user can finally be unfiltered—and be understood",
+    "metaphor": {
+      "user": "The light—raw, intense, too much for most people to look at directly",
+      "product": "The interface that refracts that light into something others can see and understand"
+    },
+    "voice": {
+      "is": ["Direct", "Knowing", "Private", "Intense", "Premium"],
+      "isNot": ["Friendly", "Cheerful", "Social", "Soft", "Accessible"]
+    }
+  },
+
+  "colors": {
+    "backgrounds": {
+      "description": "The Void - Always true black or near-black",
+      "deepBlack": { "value": "#000000", "description": "Main surface, the void" },
+      "surface": { "value": "#050508", "description": "Subtle elevation" },
+      "elevated": { "value": "#0a0a0f", "description": "Cards, containers" },
+      "border": { "value": "#1a1a1f", "description": "Subtle borders" }
+    },
+    "text": {
+      "description": "The Light - High contrast hierarchy",
+      "primary": { "value": "#ffffff", "description": "Headlines, emphasis" },
+      "secondary": { "value": "#888888", "description": "Body, descriptions" },
+      "muted": { "value": "#666666", "description": "Hints, timestamps" }
+    },
+    "accent": {
+      "description": "The Refraction - Use sparingly for emphasis",
+      "electricBlue": { "value": "#0066ff", "description": "Primary accent" },
+      "cyan": { "value": "#00d4ff", "description": "Light variant" },
+      "subtle": { "value": "rgba(0, 102, 255, 0.15)", "description": "Background tints" },
+      "glow": { "value": "rgba(0, 102, 255, 0.4)", "description": "Glow effects" }
+    },
+    "dispersion": {
+      "description": "Prism Effect - Only for AI moments, transitions. Use very sparingly",
+      "red": { "value": "#ff0040" },
+      "orange": { "value": "#ff6b00" },
+      "yellow": { "value": "#ffd000" },
+      "green": { "value": "#00ff88" },
+      "cyan": { "value": "#00d4ff" },
+      "violet": { "value": "#8800ff" }
+    },
+    "functional": {
+      "success": { "value": "#00e676", "description": "Confirmations, checkmarks only" },
+      "urgency": { "value": "#ff3d71", "description": "Timers only, use very sparingly" },
+      "warning": { "value": "#ff9100", "description": "Alerts" }
+    },
+    "avoid": [
+      "Warm colors (oranges, corals, creams) for primary elements",
+      "Soft pastels",
+      "Wellness aesthetics",
+      "Nature imagery colors",
+      "Soft gradients"
+    ]
+  },
+
+  "typography": {
+    "strategy": "Two fonts tell the product story: chaos in, clarity out",
+    "fonts": {
+      "userInput": {
+        "family": "JetBrains Mono, SF Mono, IBM Plex Mono, monospace",
+        "description": "Raw, unfiltered—straight from the brain",
+        "usage": ["User input fields", "Raw thoughts", "Text input areas"]
+      },
+      "refined": {
+        "family": "Inter, SF Pro, system-ui, sans-serif",
+        "description": "Clean, elegant, structured—processed by PRISM",
+        "usage": ["AI responses", "Headlines", "Refined content", "UI elements"]
+      }
+    },
+    "scale": {
+      "xs": { "value": "0.75rem", "px": "12px", "usage": "Legal, timestamps" },
+      "sm": { "value": "0.875rem", "px": "14px", "usage": "Secondary, hints" },
+      "base": { "value": "1rem", "px": "16px", "usage": "Body text" },
+      "lg": { "value": "1.125rem", "px": "18px", "usage": "Large body" },
+      "xl": { "value": "1.25rem", "px": "20px", "usage": "Section headers" },
+      "2xl": { "value": "1.5rem", "px": "24px", "usage": "Subheadlines" },
+      "3xl": { "value": "1.875rem", "px": "30px", "usage": "Headlines mobile" },
+      "4xl": { "value": "2.25rem", "px": "36px", "usage": "Headlines tablet" },
+      "5xl": { "value": "3rem", "px": "48px", "usage": "Headlines desktop" },
+      "6xl": { "value": "3.75rem", "px": "60px", "usage": "Hero headlines" }
+    },
+    "weights": {
+      "regular": 400,
+      "medium": 500,
+      "semibold": 600
+    },
+    "lineHeight": {
+      "tight": 1.1,
+      "snug": 1.2,
+      "normal": 1.4,
+      "relaxed": 1.5,
+      "loose": 1.6
+    }
+  },
+
+  "spacing": {
+    "description": "Generous, intentional spacing—emptiness is the feature",
+    "scale": {
+      "void": { "value": "8rem", "px": "128px", "description": "Maximum emptiness" },
+      "breath": { "value": "4rem", "px": "64px", "description": "Breathing room" },
+      "pause": { "value": "2rem", "px": "32px", "description": "Thoughtful pause" },
+      "gap": { "value": "1rem", "px": "16px", "description": "Standard gap" },
+      "tight": { "value": "0.5rem", "px": "8px", "description": "Tight grouping" }
+    }
+  },
+
+  "layout": {
+    "mobile": {
+      "breakpoint": "0-639px",
+      "padding": "20-24px",
+      "maxWidth": "100%",
+      "touchTarget": "44x44px minimum",
+      "gap": "16-20px"
+    },
+    "tablet": {
+      "breakpoint": "640px-1023px",
+      "padding": "32px",
+      "maxWidth": "640px",
+      "gap": "24px"
+    },
+    "desktop": {
+      "breakpoint": "1024px+",
+      "padding": "48px",
+      "maxWidth": "720px",
+      "gap": "32px"
+    }
+  },
+
+  "motion": {
+    "description": "Slow and deliberate—no rush here",
+    "duration": {
+      "fast": { "value": "200ms", "usage": "Micro-interactions" },
+      "default": { "value": "300ms", "usage": "Standard transitions" },
+      "slow": { "value": "500ms", "usage": "Page transitions" },
+      "pause": { "value": "800ms", "usage": "Deliberate pauses, AI thinking" }
+    },
+    "easing": {
+      "prism": "cubic-bezier(0.4, 0, 0.2, 1)",
+      "fade": "cubic-bezier(0.0, 0, 0.2, 1)"
+    },
+    "patterns": {
+      "pageTransition": {
+        "fadeIn": "500ms ease-in-out",
+        "slideUp": "20px travel, 500ms ease-in-out",
+        "stagger": "50ms delay between elements"
+      },
+      "optionSelect": {
+        "border": "200ms",
+        "background": "200ms",
+        "scale": "none"
+      },
+      "aiReveal": {
+        "thinkingPause": "800ms",
+        "containerFade": "300ms",
+        "textAppear": "typing effect or staggered lines"
+      }
+    },
+    "avoid": [
+      "Bouncing animations",
+      "Springing effects",
+      "Quick snappy feedback",
+      "Playful motion",
+      "Parallax scrolling",
+      "Excessive movement"
+    ]
+  },
+
+  "components": {
+    "button": {
+      "cta": {
+        "background": "linear-gradient(135deg, #0066ff, #00d4ff)",
+        "text": "#ffffff",
+        "textTransform": "uppercase",
+        "fontWeight": 600,
+        "borderRadius": "4-8px",
+        "padding": "16px 32px",
+        "boxShadow": "0 4px 24px rgba(0, 102, 255, 0.4)",
+        "hoverTransform": "translateY(-2px)"
+      },
+      "back": {
+        "style": "text only, no background",
+        "color": "#666666",
+        "hoverColor": "#ffffff",
+        "size": "24px"
+      }
+    },
+    "optionCard": {
+      "background": "#0a0a0f or transparent",
+      "border": "1px #1a1a1f",
+      "borderRadius": "0-4px (sharp)",
+      "padding": "16px 20px",
+      "hoverBorder": "#0066ff",
+      "selectedBorder": "#0066ff",
+      "selectedBackground": "rgba(0, 102, 255, 0.15)",
+      "transition": "300ms ease-in-out"
+    },
+    "inputField": {
+      "background": "transparent",
+      "border": "none or 1px bottom only",
+      "borderColor": "#1a1a1f",
+      "focusBorderColor": "#0066ff",
+      "fontFamily": "monospace",
+      "textColor": "#ffffff",
+      "placeholderColor": "#666666"
+    },
+    "aiResponse": {
+      "border": "1px #1a1a1f",
+      "borderLeftAccent": "2px #0066ff",
+      "background": "#050508",
+      "padding": "24px",
+      "fontFamily": "sans-serif",
+      "animation": "fade-in, 500ms ease-in-out"
+    },
+    "badge": {
+      "background": "transparent or very subtle",
+      "border": "1px #666666",
+      "textColor": "#666666",
+      "textTransform": "uppercase",
+      "letterSpacing": "0.05em",
+      "fontSize": "12px",
+      "borderRadius": "2px (sharp)",
+      "padding": "4px 12px"
+    },
+    "frequencyWave": {
+      "type": "SVG-based animated wave",
+      "color": "#0066ff",
+      "height": "8px",
+      "behavior": "amplitude increases with progress, stabilizes at 100%",
+      "glow": "subtle on filled portion"
+    }
+  },
+
+  "principles": {
+    "design": [
+      {
+        "name": "Emptiness is the Feature",
+        "description": "The void is the invitation—space for the user to fill",
+        "do": ["Generous blackspace", "Single focus per screen", "Content emerges from void"],
+        "dont": ["Busy layouts", "Multiple competing elements", "Visual noise"]
+      },
+      {
+        "name": "Dark Means Safe",
+        "description": "True black backgrounds create psychological safety",
+        "do": ["True black (#000000)", "High contrast with white", "Darkness as safety"],
+        "dont": ["Dark gray that feels designed", "Warm backgrounds", "Soft backgrounds"]
+      },
+      {
+        "name": "Contrast Tells the Story",
+        "description": "Raw input looks raw, refined output looks refined",
+        "do": ["Monospace for user input", "Sans-serif for AI output", "Visual distinction"],
+        "dont": ["Same treatment for input and output"]
+      },
+      {
+        "name": "Slow and Deliberate",
+        "description": "Everything moves with intention—no rush here",
+        "do": ["300-500ms transitions", "Ease-in-out timing", "Deliberate pauses"],
+        "dont": ["Bouncy animations", "Quick snappy feedback", "Playful motion"]
+      },
+      {
+        "name": "Intensity Without Aggression",
+        "description": "Sharp and technical, but not cold or hostile",
+        "do": ["Premium feel", "Powerful presence", "Technical precision"],
+        "dont": ["Cold hostility", "Aggressive visuals", "Intimidating elements"]
+      }
+    ],
+    "copy": [
+      "Direct, not soft",
+      "Knowing, not cheerful",
+      "Confrontational, not gentle",
+      "Specific, not vague"
+    ]
+  }
+}
+

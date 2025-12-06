@@ -1,6 +1,7 @@
-# PRISM Design System Reference
+# PRISM Developer Guide
 
-Developer guide for implementing the PRISM visual language.
+> Implementation cheatsheet for building PRISM interfaces.
+> For the full design system and rationale, see `PRISM_DESIGN_BRIEF.md`.
 
 ---
 
@@ -512,7 +513,8 @@ When implementing a screen, verify:
 
 ## Resources
 
-- **Design Brief:** `PRISM_DESIGN_BRIEF.md`
+- **Design Brief:** `PRISM_DESIGN_BRIEF.md` (in this folder)
+- **Component Examples:** `PRISM_COMPONENTS.md` (in this folder)
 - **CSS Variables:** `src/app/globals.css`
 - **Tailwind Config:** `tailwind.config.ts`
 

@@ -162,7 +162,7 @@ export default function PaywallScreen({ screen }: PaywallScreenProps) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.4 }}
-            className="border border-prism-muted/20 p-6 mb-8"
+            className="bg-prism-surface border border-white/5 rounded-2xl p-6 mb-8"
           >
             <p className="text-prism-muted uppercase text-xs tracking-wider mb-4">
               What you get
@@ -176,13 +176,41 @@ export default function PaywallScreen({ screen }: PaywallScreenProps) {
                 'Access on all devices',
               ].map((feature, index) => (
                 <li key={index} className="flex items-center gap-3">
-                  <div className="w-4 h-4 rounded-full bg-prism-electric-blue/20 flex items-center justify-center flex-shrink-0">
-                    <div className="w-1.5 h-1.5 rounded-full bg-prism-electric-blue" />
+                  <div className="w-5 h-5 rounded-full bg-prism-success/20 flex items-center justify-center flex-shrink-0">
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#00e676" strokeWidth="3">
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
                   </div>
                   <span className="text-prism-white/90">{feature}</span>
                 </li>
               ))}
             </ul>
+          </motion.div>
+
+          {/* Testimonials - 3 small cards */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.45 }}
+            className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-8"
+          >
+            {[
+              { quote: "Finally understood.", name: "Maya, 34" },
+              { quote: "Not spiraling alone anymore.", name: "Alex, 41" },
+              { quote: "Worth every penny.", name: "Jordan, 29" },
+            ].map((testimonial, i) => (
+              <div key={i} className="p-4 bg-prism-surface border border-white/5 rounded-xl text-center">
+                <div className="flex justify-center gap-0.5 mb-2">
+                  {[1, 2, 3, 4, 5].map((star) => (
+                    <svg key={star} width="10" height="10" viewBox="0 0 24 24" fill="#ffd000">
+                      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                    </svg>
+                  ))}
+                </div>
+                <p className="text-xs text-prism-muted-light italic mb-1">"{testimonial.quote}"</p>
+                <p className="text-xs text-prism-muted">— {testimonial.name}</p>
+              </div>
+            ))}
           </motion.div>
 
           {/* CTA button */}
@@ -191,28 +219,52 @@ export default function PaywallScreen({ screen }: PaywallScreenProps) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.5 }}
             onClick={handlePurchase}
-            className="w-full btn-primary py-5 text-lg font-medium hover:shadow-prism-strong transition-all duration-300 mb-6"
+            className="w-full btn-primary py-5 text-lg font-medium hover:shadow-prism-strong transition-all duration-300 mb-4"
           >
-            Claim your void — {selectedPlan === 'monthly' ? '$9.99' : '$5.99'}/mo
+            Start My Journey — {selectedPlan === 'monthly' ? '$9.99' : '$5.99'}/mo
           </motion.button>
 
-          {/* Guarantee */}
+          {/* Guarantee - More prominent */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.55 }}
+            className="p-4 bg-prism-success/10 border border-prism-success/20 rounded-xl mb-6"
+          >
+            <div className="flex items-center justify-center gap-3">
+              <div className="w-10 h-10 rounded-full bg-prism-success/20 flex items-center justify-center flex-shrink-0">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00e676" strokeWidth="2">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                  <path d="M9 12l2 2 4-4" />
+                </svg>
+              </div>
+              <div className="text-left">
+                <p className="text-sm font-medium text-prism-white">30-Day Money-Back Guarantee</p>
+                <p className="text-xs text-prism-muted-light">Not for you? Full refund, no questions asked.</p>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Trust signals */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.6 }}
-            className="text-center"
+            className="flex justify-center gap-6 text-xs text-prism-muted mb-6"
           >
-            <div className="flex items-center justify-center gap-2 mb-2">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-prism-muted-light">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                <path d="M9 12l2 2 4-4" />
+            <span className="flex items-center gap-1">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                <path d="M7 11V7a5 5 0 0110 0v4" />
               </svg>
-              <span className="text-prism-muted-light text-sm">30-day money-back guarantee</span>
-            </div>
-            <p className="text-prism-muted text-xs">
-              Not for you? Full refund, no questions asked.
-            </p>
+              Secure payment
+            </span>
+            <span className="flex items-center gap-1">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M18 6L6 18M6 6l12 12" />
+              </svg>
+              Cancel anytime
+            </span>
           </motion.div>
 
           {/* Skip option */}

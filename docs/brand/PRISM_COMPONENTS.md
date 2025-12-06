@@ -1,6 +1,7 @@
 # PRISM Component Examples
 
-Ready-to-use React component patterns for building PRISM interfaces.
+> Ready-to-use React component patterns for building PRISM interfaces.
+> For design rationale, see `PRISM_DESIGN_BRIEF.md`. For CSS utilities, see `PRISM_DEV_GUIDE.md`.
 
 ---
 
