@@ -16,14 +16,13 @@ export default function MirrorRevealScreen({ screen }: MirrorRevealScreenProps) 
   const [showInsight, setShowInsight] = useState(false);
   const [showButton, setShowButton] = useState(false);
   
-  // Get the selected thought from previous screen (mirror-select)
+  // Get the selected thought from previous screen
   const selectedThought = getAnswer('mirror-select') as string;
   const insight = MIRROR_INSIGHTS[selectedThought] || MIRROR_INSIGHTS['pretending'];
 
   useEffect(() => {
-    // Show prism animation, then reveal insight
-    const timer1 = setTimeout(() => setShowInsight(true), 1500);
-    const timer2 = setTimeout(() => setShowButton(true), 3500);
+    const timer1 = setTimeout(() => setShowInsight(true), 1200);
+    const timer2 = setTimeout(() => setShowButton(true), 3000);
     
     return () => {
       clearTimeout(timer1);
@@ -39,67 +38,29 @@ export default function MirrorRevealScreen({ screen }: MirrorRevealScreenProps) 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="border border-prism-muted/30 p-6 mb-8"
+          className="border border-prism-border p-6 mb-10"
         >
-          <p className="font-raw text-prism-muted-light text-lg leading-relaxed">
+          <p className="font-raw text-prism-secondary text-base leading-relaxed">
             "{insight.raw}"
           </p>
         </motion.div>
 
-        {/* Prism refraction animation */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: showInsight ? 0 : 1 }}
-          transition={{ duration: 0.5 }}
-          className="flex justify-center my-8"
-        >
-          <div className="relative">
-            {/* Prism triangle */}
-            <motion.div
-              animate={{ 
-                rotate: [0, 5, -5, 0],
-                scale: [1, 1.05, 1],
-              }}
-              transition={{ 
-                duration: 2,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
-              className="w-16 h-16 relative"
-            >
-              <div 
-                className="absolute inset-0 bg-gradient-to-br from-prism-white/10 to-transparent"
-                style={{
-                  clipPath: 'polygon(50% 0%, 0% 100%, 100% 100%)',
-                }}
-              />
-              
-              {/* Light beam entering */}
-              <motion.div
-                animate={{ opacity: [0.3, 0.8, 0.3] }}
-                transition={{ duration: 1.5, repeat: Infinity }}
-                className="absolute -left-12 top-1/2 w-12 h-[2px] bg-gradient-to-r from-transparent to-prism-white/50"
-              />
-              
-              {/* Dispersed light exiting */}
-              <motion.div
-                animate={{ opacity: [0.2, 0.6, 0.2] }}
-                transition={{ duration: 1.5, repeat: Infinity, delay: 0.5 }}
-                className="absolute -right-16 top-1/3 w-16 h-8 overflow-hidden"
-              >
-                <div className="h-[1px] bg-prism-red/60 mb-1 transform rotate-[-15deg]" />
-                <div className="h-[1px] bg-prism-orange/60 mb-1 transform rotate-[-10deg]" />
-                <div className="h-[1px] bg-prism-yellow/60 mb-1 transform rotate-[-5deg]" />
-                <div className="h-[1px] bg-prism-green/60 mb-1" />
-                <div className="h-[1px] bg-prism-cyan/60 mb-1 transform rotate-[5deg]" />
-                <div className="h-[1px] bg-prism-electric-blue/60 mb-1 transform rotate-[10deg]" />
-                <div className="h-[1px] bg-prism-violet/60 transform rotate-[15deg]" />
-              </motion.div>
-            </motion.div>
-            
-            <p className="text-center text-prism-muted text-sm mt-4">Refracting...</p>
-          </div>
-        </motion.div>
+        {/* Processing indicator */}
+        {!showInsight && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="flex justify-center my-12"
+          >
+            <div className="flex items-center gap-3">
+              <div className="w-2 h-2 bg-prism-electric-blue animate-pulse" />
+              <span className="font-raw text-xs text-prism-muted uppercase tracking-badge">
+                Processing...
+              </span>
+            </div>
+          </motion.div>
+        )}
 
         {/* AI Insight */}
         <AnimatePresence>
@@ -108,39 +69,33 @@ export default function MirrorRevealScreen({ screen }: MirrorRevealScreenProps) 
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="relative"
+              className="border border-prism-electric-blue/30 p-8"
             >
-              {/* Subtle prism glow border */}
-              <div className="absolute -inset-[1px] bg-gradient-to-r from-prism-electric-blue/20 via-prism-violet/10 to-prism-cyan/20 opacity-50" />
-              
-              <div className="relative border border-prism-muted/20 bg-prism-black p-8">
-                {/* Insight text */}
-                <div className="space-y-4">
-                  {insight.insight.split('\n\n').map((paragraph, index) => (
-                    <motion.p
-                      key={index}
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.5, delay: index * 0.3 }}
-                      className={`font-refined text-lg leading-relaxed ${
-                        paragraph.startsWith('The question')
-                          ? 'text-prism-muted-light italic mt-6'
-                          : 'text-prism-white/90'
-                      }`}
-                    >
-                      {/* Handle line breaks within paragraphs (especially for the question/answer format) */}
-                      {paragraph.includes('\n') 
-                        ? paragraph.split('\n').map((line, lineIndex) => (
-                            <span key={lineIndex}>
-                              {line}
-                              {lineIndex < paragraph.split('\n').length - 1 && <br />}
-                            </span>
-                          ))
-                        : paragraph
-                      }
-                    </motion.p>
-                  ))}
-                </div>
+              {/* Insight text */}
+              <div className="space-y-6">
+                {insight.insight.split('\n\n').map((paragraph, index) => (
+                  <motion.p
+                    key={index}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.3 }}
+                    className={`font-refined text-lg leading-relaxed ${
+                      paragraph.startsWith('The question')
+                        ? 'text-prism-secondary italic mt-8 pt-6 border-t border-prism-border'
+                        : 'text-prism-white'
+                    }`}
+                  >
+                    {paragraph.includes('\n') 
+                      ? paragraph.split('\n').map((line, lineIndex) => (
+                          <span key={lineIndex}>
+                            {line}
+                            {lineIndex < paragraph.split('\n').length - 1 && <br />}
+                          </span>
+                        ))
+                      : paragraph
+                    }
+                  </motion.p>
+                ))}
               </div>
             </motion.div>
           )}
@@ -153,11 +108,11 @@ export default function MirrorRevealScreen({ screen }: MirrorRevealScreenProps) 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="mt-10 flex justify-center"
+              className="mt-12 flex justify-center"
             >
               <button
                 onClick={() => goToNext()}
-                className="btn-primary px-12 py-4 text-lg hover:shadow-prism transition-shadow duration-300"
+                className="btn-primary"
               >
                 I want more of this
               </button>

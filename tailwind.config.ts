@@ -9,35 +9,30 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // PRISM color system (Conversion-Optimized)
+        // PRISM color system - THE VOID
         prism: {
-          black: '#050508',
-          deep: '#0a0a0f',
-          surface: '#12121a',
+          // The Void - True black
+          black: '#000000',
+          surface: '#050508',
+          elevated: '#0a0a0f',
+          border: '#1a1a1f',
+          // The Light
           white: '#ffffff',
-          'electric-blue': '#0088ff',
+          secondary: '#888888',
+          muted: '#666666',
+          // The Refraction - Use sparingly
+          'electric-blue': '#0066ff',
           cyan: '#00d4ff',
-          muted: '#6b6b7b',
-          'muted-light': '#9090a0',
-          // Conversion accent colors
+          // Success state only
           success: '#00e676',
-          warning: '#ff9100',
-          urgency: '#ff3d71',
-          // Dispersion colors - for subtle rainbow effects
-          red: '#ff0040',
-          orange: '#ff6b00',
-          yellow: '#ffd000',
-          green: '#00ff88',
-          violet: '#8800ff',
         },
       },
       fontFamily: {
-        // Main font
-        sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
         // Raw input - monospace for unfiltered thoughts
-        raw: ['var(--font-mono)', 'ui-monospace', 'monospace'],
+        raw: ['var(--font-mono)', 'ui-monospace', 'SF Mono', 'Consolas', 'monospace'],
         // Refined output - clean sans-serif for processed insights
         refined: ['var(--font-inter)', 'system-ui', 'sans-serif'],
+        sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
       },
       spacing: {
         // PRISM spacing system - generous, intentional
@@ -46,6 +41,19 @@ const config: Config = {
         pause: '2rem',
         gap: '1rem',
       },
+      borderRadius: {
+        // PRISM is SHARP - max 4px
+        'none': '0',
+        'sharp': '2px',
+        'sm': '2px',
+        'DEFAULT': '2px',
+        'md': '4px',
+        'lg': '4px',
+        'xl': '4px',
+        '2xl': '4px',
+        '3xl': '4px',
+        'full': '9999px', // Keep for actual circles
+      },
       animation: {
         // PRISM animation system - slow and deliberate
         'fade-in': 'prism-fade-in 300ms cubic-bezier(0.0, 0, 0.2, 1) forwards',
@@ -53,7 +61,6 @@ const config: Config = {
         'slide-up': 'prism-slide-up 500ms cubic-bezier(0.4, 0, 0.2, 1) forwards',
         'pulse-slow': 'prism-pulse 2s cubic-bezier(0.4, 0, 0.2, 1) infinite',
         wave: 'prism-wave 1.5s cubic-bezier(0.4, 0, 0.2, 1) infinite',
-        dispersion: 'prism-dispersion 8s linear infinite',
         blink: 'prism-blink 1s step-end infinite',
       },
       keyframes: {
@@ -84,10 +91,6 @@ const config: Config = {
           '50%': { transform: 'scaleY(1)' },
           '100%': { transform: 'scaleY(0.3)' },
         },
-        'prism-dispersion': {
-          from: { filter: 'hue-rotate(0deg)' },
-          to: { filter: 'hue-rotate(360deg)' },
-        },
         'prism-blink': {
           '0%, 100%': { opacity: '1' },
           '50%': { opacity: '0' },
@@ -109,7 +112,8 @@ const config: Config = {
         // Refined tracking for PRISM typography
         'refined': '-0.02em',
         'display': '-0.03em',
-        'raw': '-0.01em',
+        'raw': '0',
+        'badge': '0.1em',
       },
       lineHeight: {
         // PRISM line heights
@@ -118,18 +122,9 @@ const config: Config = {
         'display': '1.1',
       },
       boxShadow: {
-        // PRISM glow effects (enhanced)
-        'prism': '0 0 40px rgba(0, 136, 255, 0.2)',
-        'prism-strong': '0 0 60px rgba(0, 136, 255, 0.35)',
-        'prism-glow': '0 4px 24px rgba(0, 136, 255, 0.3)',
-        'card': '0 4px 20px rgba(0, 0, 0, 0.4)',
-        'card-hover': '0 8px 32px rgba(0, 136, 255, 0.15)',
-      },
-      backgroundImage: {
-        // Gradient backgrounds
-        'gradient-radial': 'radial-gradient(ellipse at 50% 0%, var(--tw-gradient-stops))',
-        'gradient-cta': 'linear-gradient(135deg, #0088ff 0%, #00d4ff 100%)',
-        'gradient-card': 'linear-gradient(180deg, rgba(18, 18, 26, 1) 0%, rgba(10, 10, 15, 1) 100%)',
+        // PRISM glow effects - subtle, not soft
+        'prism': '0 0 24px rgba(0, 102, 255, 0.15)',
+        'prism-strong': '0 0 40px rgba(0, 102, 255, 0.25)',
       },
     },
   },

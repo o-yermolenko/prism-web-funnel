@@ -42,19 +42,19 @@ export default function FunnelLayout({
 
   return (
     <div className="relative min-h-screen min-h-[100dvh] bg-prism-black flex flex-col overflow-x-hidden">
-      {/* Progress bar with step counter at the very top */}
+      {/* Progress bar - sharp, minimal */}
       {showProgress && (
-        <div className="fixed top-0 left-0 right-0 z-50 bg-prism-black/90 backdrop-blur-sm border-b border-white/5">
+        <div className="fixed top-0 left-0 right-0 z-50 bg-prism-black border-b border-prism-border">
           <ProgressLine />
         </div>
       )}
 
-      {/* Back button - positioned below progress bar */}
+      {/* Back button - SHARP, not rounded */}
       {showBackButton && !isFirstScreen && (
         <div className="fixed top-14 left-4 sm:top-16 sm:left-5 z-50">
           <button
             onClick={handleBack}
-            className="relative flex items-center justify-center w-10 h-10 rounded-xl backdrop-blur-md bg-prism-surface/80 border border-white/10 text-prism-muted-light hover:text-prism-white hover:bg-prism-surface hover:border-prism-electric-blue/30 transition-all duration-300"
+            className="relative flex items-center justify-center w-11 h-11 border border-prism-border bg-prism-black text-prism-muted hover:text-prism-white hover:border-prism-electric-blue/50 transition-all duration-300"
             aria-label="Go back"
           >
             <svg
@@ -73,7 +73,7 @@ export default function FunnelLayout({
         </div>
       )}
 
-      {/* Main content - conditional padding based on progress bar visibility */}
+      {/* Main content */}
       <main className={`flex-1 flex flex-col items-center px-4 sm:px-6 pb-8 sm:pb-12 ${
         showProgress ? 'pt-28 sm:pt-24' : 'pt-0'
       } ${showProgress ? 'sm:justify-center' : ''}`}>

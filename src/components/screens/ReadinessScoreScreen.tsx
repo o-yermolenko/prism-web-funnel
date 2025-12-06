@@ -19,7 +19,6 @@ export default function ReadinessScoreScreen({ screen }: ReadinessScoreScreenPro
   const targetScore = readiness?.score || 87;
 
   useEffect(() => {
-    // Animate score counting up
     const duration = 2000;
     const steps = 60;
     const increment = targetScore / steps;
@@ -44,14 +43,14 @@ export default function ReadinessScoreScreen({ screen }: ReadinessScoreScreenPro
   return (
     <FunnelLayout showProgress={screen.showProgress} showBackButton={screen.showBackButton}>
       <div className="w-full max-w-xl mx-auto text-center px-4">
-        {/* Badge */}
+        {/* Badge - monospace */}
         <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
           transition={{ duration: 0.4 }}
-          className="inline-block mb-6"
+          className="inline-block mb-8"
         >
-          <span className="text-xs tracking-[0.15em] text-prism-success font-raw uppercase border border-prism-success/30 bg-prism-success/10 px-4 py-2 rounded-full">
+          <span className="font-raw text-xs tracking-badge text-prism-success uppercase border border-prism-success/30 px-4 py-2">
             Analysis Complete
           </span>
         </motion.div>
@@ -61,54 +60,24 @@ export default function ReadinessScoreScreen({ screen }: ReadinessScoreScreenPro
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="text-2xl md:text-3xl font-semibold text-prism-white mb-8 tracking-tight"
+          className="text-2xl md:text-3xl font-refined font-medium text-prism-white mb-10 tracking-tight"
         >
           {screen.header}
         </motion.h1>
 
-        {/* Score Circle */}
+        {/* Score - large monospace number */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="relative w-48 h-48 mx-auto mb-8"
+          className="mb-8"
         >
-          {/* Background circle */}
-          <svg className="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
-            <circle
-              cx="50"
-              cy="50"
-              r="45"
-              fill="none"
-              stroke="rgba(255,255,255,0.1)"
-              strokeWidth="6"
-            />
-            {/* Animated progress circle */}
-            <circle
-              cx="50"
-              cy="50"
-              r="45"
-              fill="none"
-              stroke="url(#scoreGradient)"
-              strokeWidth="6"
-              strokeLinecap="round"
-              strokeDasharray={`${(animatedScore / 100) * 283} 283`}
-              className="transition-all duration-100"
-            />
-            <defs>
-              <linearGradient id="scoreGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="#00e676" />
-                <stop offset="100%" stopColor="#00d4ff" />
-              </linearGradient>
-            </defs>
-          </svg>
-          
-          {/* Center content */}
-          <div className="absolute inset-0 flex flex-col items-center justify-center">
-            <span className="text-5xl font-bold text-prism-white">
-              {animatedScore}%
-            </span>
-            <span className="text-sm text-prism-success font-semibold uppercase tracking-wider mt-1">
+          <span className="font-raw text-7xl text-prism-white tracking-tight">
+            {animatedScore}
+          </span>
+          <span className="font-raw text-3xl text-prism-muted ml-1">%</span>
+          <div className="mt-2">
+            <span className="font-raw text-xs text-prism-success uppercase tracking-badge">
               {readiness.label}
             </span>
           </div>
@@ -119,21 +88,21 @@ export default function ReadinessScoreScreen({ screen }: ReadinessScoreScreenPro
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.4 }}
-          className="text-lg text-prism-cyan mb-8 max-w-md mx-auto"
+          className="text-lg text-prism-secondary mb-10 max-w-md mx-auto"
         >
           {readiness.insight}
         </motion.p>
 
-        {/* Factors */}
+        {/* Factors - sharp boxes */}
         {showFactors && (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="p-6 bg-prism-surface border border-white/5 rounded-2xl mb-8"
+            className="p-6 border border-prism-border mb-10"
           >
-            <p className="text-xs text-prism-muted uppercase tracking-wider mb-4">
-              Your Readiness Factors
+            <p className="font-raw text-xs text-prism-muted uppercase tracking-badge mb-6">
+              Readiness Factors
             </p>
             
             <div className="space-y-4">
@@ -144,16 +113,16 @@ export default function ReadinessScoreScreen({ screen }: ReadinessScoreScreenPro
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.4, delay: index * 0.1 }}
                 >
-                  <div className="flex justify-between items-center mb-1">
-                    <span className="text-sm text-prism-muted-light">{factor.label}</span>
-                    <span className="text-sm font-semibold text-prism-white">{factor.value}%</span>
+                  <div className="flex justify-between items-center mb-2">
+                    <span className="text-sm text-prism-secondary">{factor.label}</span>
+                    <span className="font-raw text-sm text-prism-white">{factor.value}%</span>
                   </div>
-                  <div className="h-2 bg-prism-muted/20 rounded-full overflow-hidden">
+                  <div className="h-1 bg-prism-border overflow-hidden">
                     <motion.div
                       initial={{ width: 0 }}
                       animate={{ width: `${factor.value}%` }}
                       transition={{ duration: 0.8, delay: index * 0.1 }}
-                      className="h-full bg-gradient-to-r from-prism-electric-blue to-prism-success rounded-full"
+                      className="h-full bg-prism-electric-blue"
                     />
                   </div>
                 </motion.div>
@@ -169,11 +138,10 @@ export default function ReadinessScoreScreen({ screen }: ReadinessScoreScreenPro
           transition={{ duration: 0.5, delay: 1.5 }}
         >
           <button onClick={() => goToNext()} className="btn-primary w-full sm:w-auto">
-            See My Transformation Path
+            Continue
           </button>
         </motion.div>
       </div>
     </FunnelLayout>
   );
 }
-

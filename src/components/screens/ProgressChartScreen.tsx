@@ -183,7 +183,7 @@ export default function ProgressChartScreen({ screen }: ProgressChartScreenProps
           className="p-5 bg-prism-success/10 border border-prism-success/20 rounded-2xl mb-8"
         >
           <div className="flex items-start gap-3">
-            <div className="w-8 h-8 rounded-full bg-prism-success/20 flex items-center justify-center flex-shrink-0">
+            <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-prism-success/20 flex items-center justify-center flex-shrink-0">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-prism-success">
                 <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
                 <polyline points="22 4 12 14.01 9 11.01" />

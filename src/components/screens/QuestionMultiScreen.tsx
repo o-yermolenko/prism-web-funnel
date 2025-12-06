@@ -41,13 +41,13 @@ export default function QuestionMultiScreen({ screen }: QuestionMultiScreenProps
   return (
     <FunnelLayout showProgress={screen.showProgress} showBackButton={screen.showBackButton}>
       <div className="w-full max-w-xl mx-auto">
-        {/* Header Section - consistent spacing before options */}
+        {/* Header Section */}
         <div className="mb-12 sm:mb-16">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="text-2xl md:text-3xl lg:text-4xl font-refined font-semibold text-prism-white tracking-tight text-center leading-snug"
+            className="text-2xl md:text-3xl lg:text-4xl font-refined font-medium text-prism-white tracking-tight text-center leading-snug"
           >
             {screen.header}
           </motion.h1>
@@ -58,14 +58,14 @@ export default function QuestionMultiScreen({ screen }: QuestionMultiScreenProps
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="text-prism-muted-light mt-4 text-center text-base md:text-lg"
+              className="text-prism-secondary mt-4 text-center text-base md:text-lg"
             >
               {screen.subheader}
             </motion.p>
           )}
         </div>
 
-        {/* Options - Enhanced multi-select cards */}
+        {/* Options - SHARP multi-select cards */}
         <div className="space-y-3">
           {screen.options?.map((option, index) => {
             const isSelected = selected.includes(option.id);
@@ -77,18 +77,18 @@ export default function QuestionMultiScreen({ screen }: QuestionMultiScreenProps
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, delay: 0.1 + index * 0.06 }}
                 onClick={() => handleToggle(option.id)}
-                className={`w-full group relative text-left p-5 rounded-2xl transition-all duration-300 ${
+                className={`w-full group relative text-left p-5 transition-all duration-300 border ${
                   isSelected
-                    ? 'border-2 border-prism-electric-blue bg-gradient-to-r from-prism-electric-blue/12 to-prism-cyan/5 shadow-prism'
-                    : 'border border-white/10 bg-prism-surface hover:border-prism-electric-blue/40 hover:bg-prism-surface/80'
+                    ? 'border-prism-electric-blue bg-prism-electric-blue/5'
+                    : 'border-prism-border hover:border-prism-electric-blue/50 bg-transparent'
                 }`}
               >
                 <div className="flex items-center gap-4">
-                  {/* Checkbox */}
-                  <div className={`w-6 h-6 rounded-lg border-2 transition-all duration-300 flex items-center justify-center flex-shrink-0 ${
+                  {/* Checkbox - SHARP square, not rounded */}
+                  <div className={`w-5 h-5 border transition-all duration-300 flex items-center justify-center flex-shrink-0 ${
                     isSelected
-                      ? 'border-prism-electric-blue bg-gradient-to-r from-prism-electric-blue to-prism-cyan'
-                      : 'border-prism-muted/40 group-hover:border-prism-electric-blue/50'
+                      ? 'border-prism-electric-blue bg-prism-electric-blue'
+                      : 'border-prism-border group-hover:border-prism-electric-blue/50'
                   }`}>
                     {isSelected && (
                       <motion.svg
@@ -107,10 +107,10 @@ export default function QuestionMultiScreen({ screen }: QuestionMultiScreenProps
                   </div>
                   
                   {/* Text */}
-                  <span className={`text-base md:text-lg font-medium transition-colors duration-300 ${
+                  <span className={`text-base md:text-lg font-refined transition-colors duration-300 ${
                     isSelected
                       ? 'text-prism-white'
-                      : 'text-prism-muted-light group-hover:text-prism-white'
+                      : 'text-prism-secondary group-hover:text-prism-white'
                   }`}>
                     {option.text}
                   </span>
@@ -120,14 +120,14 @@ export default function QuestionMultiScreen({ screen }: QuestionMultiScreenProps
           })}
         </div>
 
-        {/* Selection count badge */}
+        {/* Selection count - minimal */}
         {selected.length > 0 && (
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
             className="mt-6 flex justify-center"
           >
-            <span className="text-sm text-prism-cyan bg-prism-cyan/10 px-4 py-1.5 rounded-full border border-prism-cyan/20">
+            <span className="font-raw text-xs text-prism-muted uppercase tracking-badge">
               {selected.length} selected
             </span>
           </motion.div>
@@ -146,7 +146,7 @@ export default function QuestionMultiScreen({ screen }: QuestionMultiScreenProps
             className={`w-full sm:w-auto transition-all duration-300 ${
               selected.length > 0
                 ? 'btn-primary'
-                : 'px-12 py-4 rounded-xl bg-prism-surface text-prism-muted cursor-not-allowed border border-white/5'
+                : 'px-8 py-4 bg-transparent text-prism-muted cursor-not-allowed border border-prism-border'
             }`}
           >
             Continue

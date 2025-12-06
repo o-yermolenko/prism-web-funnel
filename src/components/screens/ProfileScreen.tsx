@@ -12,12 +12,10 @@ interface ProfileScreenProps {
 export default function ProfileScreen({ screen }: ProfileScreenProps) {
   const { goToNext, getAnswer } = useFunnelNavigation();
   
-  // Get personalized data from slugs
   const primaryNeed = getAnswer('primary-need') as string;
   const bestTime = getAnswer('use-timing') as string;
   const dailyPractice = getAnswer('time-commitment') as string;
 
-  // Map answers to display text
   const needMap: Record<string, string> = {
     'unfiltered': 'A space to be unfiltered',
     'decisions': 'Help with decision-making',
@@ -57,19 +55,19 @@ export default function ProfileScreen({ screen }: ProfileScreenProps) {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="border-t border-b border-prism-muted/20 py-10 mb-10"
+          className="border-t border-b border-prism-border py-10 mb-12"
         >
-          <div className="space-y-3 text-left max-w-lg mx-auto">
+          <div className="space-y-4 text-left max-w-lg mx-auto">
             {screen.content?.map((line, index) => (
               <motion.p
                 key={index}
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, delay: 0.4 + index * 0.15 }}
-                className={`font-refined text-xl leading-normal ${
+                className={`font-refined text-xl leading-relaxed ${
                   line === '' 
                     ? 'h-6' 
-                    : 'text-prism-white/90'
+                    : 'text-prism-secondary'
                 }`}
               >
                 {line}
@@ -85,27 +83,33 @@ export default function ProfileScreen({ screen }: ProfileScreenProps) {
           transition={{ duration: 0.5, delay: 1.5 }}
           className="mb-12"
         >
-          <p className="text-sm text-prism-muted uppercase tracking-wider mb-6">
+          <p className="font-raw text-xs text-prism-muted uppercase tracking-badge mb-6">
             Your Profile
           </p>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="border border-prism-muted/20 p-4">
-              <p className="text-xs text-prism-muted uppercase mb-2">Primary Need</p>
+            <div className="border border-prism-border p-4">
+              <p className="font-raw text-xs text-prism-muted uppercase tracking-badge mb-2">
+                Primary Need
+              </p>
               <p className="text-prism-white font-refined">
                 {needMap[primaryNeed] || 'Clarity & Understanding'}
               </p>
             </div>
             
-            <div className="border border-prism-muted/20 p-4">
-              <p className="text-xs text-prism-muted uppercase mb-2">Best Time</p>
+            <div className="border border-prism-border p-4">
+              <p className="font-raw text-xs text-prism-muted uppercase tracking-badge mb-2">
+                Best Time
+              </p>
               <p className="text-prism-white font-refined">
                 {timeMap[bestTime] || 'Whenever needed'}
               </p>
             </div>
             
-            <div className="border border-prism-muted/20 p-4">
-              <p className="text-xs text-prism-muted uppercase mb-2">Daily Practice</p>
+            <div className="border border-prism-border p-4">
+              <p className="font-raw text-xs text-prism-muted uppercase tracking-badge mb-2">
+                Daily Practice
+              </p>
               <p className="text-prism-white font-refined">
                 {practiceMap[dailyPractice] || '10 minutes daily'}
               </p>
@@ -119,7 +123,7 @@ export default function ProfileScreen({ screen }: ProfileScreenProps) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 1.8 }}
           onClick={() => goToNext()}
-          className="btn-primary px-12 py-4 text-lg hover:shadow-prism transition-shadow duration-300"
+          className="btn-primary"
         >
           Get early access
         </motion.button>
@@ -127,4 +131,3 @@ export default function ProfileScreen({ screen }: ProfileScreenProps) {
     </FunnelLayout>
   );
 }
-

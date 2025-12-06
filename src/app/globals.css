@@ -3,34 +3,32 @@
 @tailwind utilities;
 
 /* ============================================
-   PRISM DESIGN SYSTEM
+   PRISM DESIGN SYSTEM - RECOVERED
+   The Void. Sharp. Intense. Not friendly.
    ============================================ */
 
 :root {
-  /* Colors - PRISM Palette (Conversion-Optimized) */
-  --prism-black: #050508;
-  --prism-deep: #0a0a0f;
-  --prism-surface: #12121a;
+  /* THE VOID - True black, always */
+  --prism-black: #000000;
+  --prism-surface: #050508;
+  --prism-elevated: #0a0a0f;
+  --prism-border: #1a1a1f;
+  
+  /* THE LIGHT - High contrast */
   --prism-white: #ffffff;
-  --prism-electric-blue: #0088ff;
+  --prism-secondary: #888888;
+  --prism-muted: #666666;
+  
+  /* THE REFRACTION - Use sparingly */
+  --prism-electric-blue: #0066ff;
   --prism-cyan: #00d4ff;
-  --prism-muted: #6b6b7b;
-  --prism-muted-light: #9090a0;
+  --prism-glow: rgba(0, 102, 255, 0.15);
   
-  /* Accent colors for conversion */
+  /* Success state only - no warm colors */
   --prism-success: #00e676;
-  --prism-warning: #ff9100;
-  --prism-urgency: #ff3d71;
   
-  /* Prism dispersion colors - for subtle rainbow effects */
-  --prism-red: #ff0040;
-  --prism-orange: #ff6b00;
-  --prism-yellow: #ffd000;
-  --prism-green: #00ff88;
-  --prism-violet: #8800ff;
-  
-  /* Typography - System font stacks */
-  --font-raw: var(--font-mono), ui-monospace, 'SF Mono', monospace;
+  /* Typography - The product story */
+  --font-raw: var(--font-mono), ui-monospace, 'SF Mono', 'Consolas', monospace;
   --font-refined: var(--font-inter), system-ui, -apple-system, sans-serif;
   
   /* Spacing - Generous, intentional */
@@ -75,13 +73,15 @@ body {
 
 /* ============================================
    TYPOGRAPHY SYSTEM
+   Raw = Monospace (user's voice, unfiltered)
+   Refined = Sans-serif (processed, clear)
    ============================================ */
 
 /* Raw input typography - monospace, unfiltered */
 .text-raw {
   font-family: var(--font-raw);
   font-weight: 400;
-  letter-spacing: -0.01em;
+  letter-spacing: 0;
   line-height: 1.6;
 }
 
@@ -215,63 +215,6 @@ body {
   animation: prism-wave 1.5s var(--ease-prism) infinite;
 }
 
-/* Prism dispersion effect - subtle rainbow glow */
-@keyframes prism-dispersion {
-  0% {
-    filter: hue-rotate(0deg);
-  }
-  100% {
-    filter: hue-rotate(360deg);
-  }
-}
-
-.animate-dispersion {
-  animation: prism-dispersion 8s linear infinite;
-}
-
-/* ============================================
-   COMPONENT UTILITIES
-   ============================================ */
-
-/* The void - maximum emptiness, space to breathe */
-.void {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: var(--space-breath);
-}
-
-/* Prism glow - subtle electric blue aura */
-.glow-prism {
-  box-shadow: 0 0 40px rgba(0, 102, 255, 0.15);
-}
-
-/* Prism dispersion glow - very subtle rainbow edge */
-.glow-dispersion {
-  position: relative;
-}
-
-.glow-dispersion::before {
-  content: '';
-  position: absolute;
-  inset: -1px;
-  background: linear-gradient(
-    90deg,
-    var(--prism-red),
-    var(--prism-orange),
-    var(--prism-yellow),
-    var(--prism-green),
-    var(--prism-cyan),
-    var(--prism-electric-blue),
-    var(--prism-violet)
-  );
-  opacity: 0.15;
-  border-radius: inherit;
-  z-index: -1;
-  filter: blur(8px);
-}
-
 /* Cursor blink - for text input state */
 @keyframes prism-blink {
   0%, 100% {
@@ -287,87 +230,97 @@ body {
 }
 
 /* ============================================
-   BUTTON STYLES (Conversion-Optimized)
+   COMPONENT UTILITIES
    ============================================ */
 
-/* Primary CTA - Bold gradient, high contrast */
+/* The void - maximum emptiness, space to breathe */
+.void {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-breath);
+}
+
+/* ============================================
+   BUTTON STYLES - Sharp, not friendly
+   ============================================ */
+
+/* Primary CTA - Gradient with glow, sharp corners */
 .btn-primary {
   background: linear-gradient(135deg, var(--prism-electric-blue) 0%, var(--prism-cyan) 100%);
   color: var(--prism-white);
   border: none;
-  padding: 1.125rem 2.5rem;
+  padding: 1rem 2rem;
   font-family: var(--font-refined);
-  font-size: 1.125rem;
+  font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
   transition: all var(--timing-default) var(--ease-prism);
-  letter-spacing: -0.01em;
-  border-radius: 12px;
-  box-shadow: 0 4px 24px rgba(0, 136, 255, 0.3);
+  letter-spacing: 0.02em;
+  border-radius: 4px;
+  box-shadow: 0 0 24px var(--prism-glow);
   text-transform: uppercase;
 }
 
 .btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 32px rgba(0, 136, 255, 0.4);
+  box-shadow: 0 0 40px rgba(0, 102, 255, 0.3);
 }
 
 .btn-primary:active {
-  transform: translateY(0);
+  transform: scale(0.98);
 }
 
-/* Secondary button - outlined with glow */
+/* Secondary button - outlined, sharp */
 .btn-secondary {
   background: transparent;
   color: var(--prism-white);
-  border: 1px solid var(--prism-muted);
+  border: 1px solid var(--prism-border);
   padding: 1rem 2rem;
   font-family: var(--font-refined);
   font-size: 1rem;
   font-weight: 500;
   cursor: pointer;
   transition: all var(--timing-default) var(--ease-prism);
-  letter-spacing: -0.01em;
-  border-radius: 12px;
+  letter-spacing: 0;
+  border-radius: 2px;
 }
 
 .btn-secondary:hover {
   border-color: var(--prism-electric-blue);
-  box-shadow: 0 0 20px rgba(0, 136, 255, 0.15);
 }
 
-/* Option button - for quiz choices */
+/* Option button - for quiz choices, SHARP */
 .btn-option {
-  background: var(--prism-surface);
+  background: transparent;
   color: var(--prism-white);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--prism-border);
   padding: 1.25rem 1.5rem;
   font-family: var(--font-refined);
   font-size: 1rem;
-  font-weight: 500;
+  font-weight: 400;
   cursor: pointer;
   transition: all var(--timing-default) var(--ease-prism);
-  border-radius: 16px;
+  border-radius: 2px;
   text-align: left;
   width: 100%;
 }
 
 .btn-option:hover {
   border-color: var(--prism-electric-blue);
-  background: rgba(0, 136, 255, 0.08);
+  background: rgba(0, 102, 255, 0.05);
 }
 
 .btn-option.selected {
   border-color: var(--prism-electric-blue);
-  background: rgba(0, 136, 255, 0.12);
-  box-shadow: 0 0 20px rgba(0, 136, 255, 0.2);
+  background: rgba(0, 102, 255, 0.08);
 }
 
 /* Text button - minimal */
 .btn-text {
   background: none;
   border: none;
-  color: var(--prism-muted-light);
+  color: var(--prism-secondary);
   cursor: pointer;
   font-family: var(--font-refined);
   font-size: 0.875rem;
@@ -377,6 +330,41 @@ body {
 
 .btn-text:hover {
   color: var(--prism-white);
+}
+
+/* ============================================
+   SHARP CARD STYLES - No rounded corners
+   ============================================ */
+
+.card-sharp {
+  background: var(--prism-surface);
+  border: 1px solid var(--prism-border);
+  border-radius: 2px;
+  transition: border-color var(--timing-default) var(--ease-prism);
+}
+
+.card-sharp:hover {
+  border-color: var(--prism-electric-blue);
+}
+
+.card-sharp.selected {
+  border-color: var(--prism-electric-blue);
+}
+
+/* ============================================
+   BADGE STYLES - Monospace, technical
+   ============================================ */
+
+.badge-raw {
+  font-family: var(--font-raw);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--prism-muted);
+  border: 1px solid var(--prism-border);
+  padding: 0.5rem 1rem;
+  border-radius: 2px;
+  background: transparent;
 }
 
 /* ============================================
@@ -396,9 +384,9 @@ body {
   padding: var(--space-pause);
 }
 
-/* High contrast border */
+/* Borders - thin, barely visible */
 .border-sharp {
-  border: 1px solid var(--prism-white);
+  border: 1px solid var(--prism-border);
 }
 
 .border-muted {
@@ -410,103 +398,34 @@ body {
   color: var(--prism-electric-blue);
 }
 
-.bg-electric {
-  background-color: var(--prism-electric-blue);
-}
-
 /* ============================================
-   CONVERSION ELEMENTS
+   CONVERSION ELEMENTS - Minimal, not decorated
    ============================================ */
 
-/* Trust badge */
+/* Trust badge - just text, no decoration */
 .trust-badge {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.5rem 1rem;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 100px;
-  font-size: 0.875rem;
-  color: var(--prism-muted-light);
+  font-family: var(--font-raw);
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  color: var(--prism-muted);
 }
 
-.trust-badge svg,
-.trust-badge .icon {
-  color: var(--prism-success);
-}
-
-/* Social proof counter */
+/* Social proof counter - just text */
 .social-proof {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 0.75rem 1.25rem;
-  background: linear-gradient(135deg, rgba(0, 136, 255, 0.1) 0%, rgba(0, 212, 255, 0.05) 100%);
-  border: 1px solid rgba(0, 136, 255, 0.2);
-  border-radius: 12px;
+  font-family: var(--font-refined);
+  font-size: 0.875rem;
+  color: var(--prism-secondary);
 }
 
 /* Progress step indicator */
 .step-indicator {
   font-family: var(--font-raw);
   font-size: 0.75rem;
-  color: var(--prism-muted-light);
+  color: var(--prism-muted);
   letter-spacing: 0.05em;
-}
-
-/* Gradient background effects */
-.bg-gradient-dark {
-  background: linear-gradient(180deg, var(--prism-black) 0%, var(--prism-deep) 50%, var(--prism-black) 100%);
-}
-
-.bg-gradient-radial {
-  background: radial-gradient(ellipse at 50% 0%, rgba(0, 136, 255, 0.08) 0%, transparent 50%);
-}
-
-.bg-gradient-glow {
-  position: relative;
-}
-
-.bg-gradient-glow::before {
-  content: '';
-  position: absolute;
-  top: -200px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 600px;
-  height: 600px;
-  background: radial-gradient(circle, rgba(0, 136, 255, 0.12) 0%, transparent 60%);
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* Card with glow effect */
-.card-glow {
-  background: var(--prism-surface);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 16px;
-  transition: all var(--timing-default) var(--ease-prism);
-}
-
-.card-glow:hover {
-  border-color: rgba(0, 136, 255, 0.3);
-  box-shadow: 0 0 30px rgba(0, 136, 255, 0.1);
-}
-
-/* Risk/status indicator bar */
-.status-bar {
-  height: 8px;
-  border-radius: 4px;
-  background: linear-gradient(90deg, var(--prism-success) 0%, var(--prism-warning) 50%, var(--prism-urgency) 100%);
-}
-
-.status-indicator {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  border: 2px solid var(--prism-white);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 /* ============================================

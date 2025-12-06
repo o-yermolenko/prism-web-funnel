@@ -23,27 +23,27 @@ export default function BeforeAfterScreen({ screen }: BeforeAfterScreenProps) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-10"
+          className="text-center mb-12"
         >
-          <h1 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-prism-white mb-3 tracking-tight">
+          <h1 className="text-2xl md:text-3xl lg:text-4xl font-refined font-medium text-prism-white mb-3 tracking-tight">
             {screen.header}
           </h1>
           {screen.subheader && (
-            <p className="text-prism-muted-light text-lg">{screen.subheader}</p>
+            <p className="text-prism-secondary text-lg">{screen.subheader}</p>
           )}
         </motion.div>
 
-        {/* Before/After Cards */}
+        {/* Before/After Grid */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="grid grid-cols-2 gap-4 mb-8"
+          className="grid grid-cols-2 gap-4 mb-10"
         >
           {/* NOW Column */}
           <div className="space-y-3">
             <div className="text-center mb-4">
-              <span className="inline-block px-4 py-1.5 bg-prism-urgency/20 border border-prism-urgency/30 rounded-full text-sm font-medium text-prism-urgency">
+              <span className="font-raw text-xs tracking-badge text-prism-muted uppercase">
                 Now
               </span>
             </div>
@@ -54,10 +54,12 @@ export default function BeforeAfterScreen({ screen }: BeforeAfterScreenProps) {
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.4, delay: 0.3 + index * 0.1 }}
-                className="p-4 bg-prism-surface border border-prism-urgency/20 rounded-xl"
+                className="p-4 border border-prism-border"
               >
-                <p className="text-xs text-prism-muted-light mb-1">{state.label}</p>
-                <p className="font-semibold text-prism-urgency">{state.before}</p>
+                <p className="font-raw text-xs text-prism-muted uppercase tracking-badge mb-1">
+                  {state.label}
+                </p>
+                <p className="font-refined text-prism-secondary">{state.before}</p>
               </motion.div>
             ))}
           </div>
@@ -65,7 +67,7 @@ export default function BeforeAfterScreen({ screen }: BeforeAfterScreenProps) {
           {/* AFTER Column */}
           <div className="space-y-3">
             <div className="text-center mb-4">
-              <span className="inline-block px-4 py-1.5 bg-prism-success/20 border border-prism-success/30 rounded-full text-sm font-medium text-prism-success">
+              <span className="font-raw text-xs tracking-badge text-prism-electric-blue uppercase">
                 After {beforeAfter.timeframe}
               </span>
             </div>
@@ -76,26 +78,14 @@ export default function BeforeAfterScreen({ screen }: BeforeAfterScreenProps) {
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.4, delay: 0.3 + index * 0.1 }}
-                className="p-4 bg-prism-surface border border-prism-success/20 rounded-xl"
+                className="p-4 border border-prism-electric-blue/30"
               >
-                <p className="text-xs text-prism-muted-light mb-1">{state.label}</p>
-                <p className="font-semibold text-prism-success">{state.after}</p>
+                <p className="font-raw text-xs text-prism-muted uppercase tracking-badge mb-1">
+                  {state.label}
+                </p>
+                <p className="font-refined text-prism-white">{state.after}</p>
               </motion.div>
             ))}
-          </div>
-        </motion.div>
-
-        {/* Arrow indicator between columns (mobile: center, desktop: hidden) */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5, delay: 0.6 }}
-          className="flex justify-center mb-8"
-        >
-          <div className="w-12 h-12 rounded-full bg-gradient-to-r from-prism-electric-blue to-prism-cyan flex items-center justify-center shadow-prism-glow">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
-              <path d="M5 12h14M12 5l7 7-7 7" />
-            </svg>
           </div>
         </motion.div>
 
@@ -104,9 +94,9 @@ export default function BeforeAfterScreen({ screen }: BeforeAfterScreenProps) {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.7 }}
-          className="text-center text-xs text-prism-muted mb-8"
+          className="text-center font-raw text-xs text-prism-muted tracking-badge mb-10"
         >
-          *Results vary based on individual commitment. This visualization represents typical user progress.
+          *Results vary based on individual commitment
         </motion.p>
 
         {/* Continue button */}
@@ -124,4 +114,3 @@ export default function BeforeAfterScreen({ screen }: BeforeAfterScreenProps) {
     </FunnelLayout>
   );
 }
-

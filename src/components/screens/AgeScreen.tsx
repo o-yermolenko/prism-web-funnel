@@ -22,13 +22,13 @@ export default function AgeScreen({ screen }: AgeScreenProps) {
   return (
     <FunnelLayout showProgress={screen.showProgress} showBackButton={screen.showBackButton}>
       <div className="w-full max-w-xl mx-auto text-center">
-        {/* Header Section - consistent spacing before options */}
+        {/* Header Section */}
         <div className="mb-12 sm:mb-16">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="text-2xl md:text-3xl lg:text-4xl font-refined font-semibold text-prism-white tracking-tight"
+            className="text-2xl md:text-3xl lg:text-4xl font-refined font-medium text-prism-white tracking-tight"
           >
             {screen.header}
           </motion.h1>
@@ -39,14 +39,14 @@ export default function AgeScreen({ screen }: AgeScreenProps) {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="text-prism-muted-light mt-4 text-base md:text-lg"
+              className="text-prism-secondary mt-4 text-base md:text-lg"
             >
               {screen.subheader}
             </motion.p>
           )}
         </div>
 
-        {/* Age Options - Enhanced grid cards */}
+        {/* Age Options - SHARP grid cards */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -56,39 +56,17 @@ export default function AgeScreen({ screen }: AgeScreenProps) {
           {screen.options?.map((option, index) => (
             <motion.button
               key={option.id}
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
               transition={{ duration: 0.3, delay: 0.2 + index * 0.05 }}
               onClick={() => handleSelect(option.id)}
-              className={`group relative py-5 px-6 rounded-2xl transition-all duration-300 ${
+              className={`group relative py-5 px-6 transition-all duration-300 border ${
                 selected === option.id
-                  ? 'border-2 border-prism-electric-blue bg-gradient-to-br from-prism-electric-blue/15 to-prism-cyan/5 text-prism-white shadow-prism'
-                  : 'border border-white/10 bg-prism-surface hover:border-prism-electric-blue/40 text-prism-muted-light hover:text-prism-white'
+                  ? 'border-prism-electric-blue bg-prism-electric-blue/5 text-prism-white'
+                  : 'border-prism-border hover:border-prism-electric-blue/50 text-prism-secondary hover:text-prism-white bg-transparent'
               }`}
             >
-              <span className="text-lg font-semibold">{option.text}</span>
-              
-              {/* Selection checkmark */}
-              {selected === option.id && (
-                <motion.div
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  className="absolute top-2 right-2 w-5 h-5 rounded-full bg-gradient-to-r from-prism-electric-blue to-prism-cyan flex items-center justify-center"
-                >
-                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3">
-                    <polyline points="20 6 9 17 4 12" />
-                  </svg>
-                </motion.div>
-              )}
-
-              {/* Hover arrow */}
-              {!selected && (
-                <div className="absolute bottom-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-prism-electric-blue">
-                    <path d="M5 12h14M12 5l7 7-7 7" />
-                  </svg>
-                </div>
-              )}
+              <span className="font-raw text-lg tracking-wide">{option.text}</span>
             </motion.button>
           ))}
         </motion.div>

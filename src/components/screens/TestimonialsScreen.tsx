@@ -26,46 +26,26 @@ export default function TestimonialsScreen({ screen }: TestimonialsScreenProps) 
           {screen.header}
         </motion.h1>
 
-        {/* Testimonials */}
+        {/* Testimonials - No avatars, no stars, just quotes */}
         <div className="space-y-6 mb-12">
-          {TESTIMONIALS.map((testimonial, index) => (
+          {TESTIMONIALS.slice(0, 3).map((testimonial, index) => (
             <motion.div
               key={testimonial.id}
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 + index * 0.15 }}
-              className="relative border border-prism-muted/20 p-6 text-left"
+              className="relative border border-prism-border p-6 text-left"
             >
-              {/* Quote mark */}
-              <span className="absolute -top-3 left-4 text-3xl text-prism-electric-blue/30">
-                "
-              </span>
-              
               {/* Quote text */}
-              <p className="font-refined text-lg text-prism-white/90 leading-relaxed mb-4 pl-2">
-                {testimonial.quote}
+              <p className="font-refined text-base text-prism-secondary leading-relaxed mb-4">
+                "{testimonial.quote}"
               </p>
               
-              {/* Author */}
-              <div className="flex items-center gap-3 pl-2">
-                <div className="w-8 h-8 rounded-full bg-prism-muted/20 flex items-center justify-center">
-                  <span className="text-prism-muted-light text-sm">
-                    {testimonial.name[0]}
-                  </span>
-                </div>
-                <div>
-                  <p className="text-prism-white text-sm font-refined">
-                    {testimonial.name}
-                  </p>
-                  <p className="text-prism-muted text-xs">
-                    {testimonial.age}
-                  </p>
-                </div>
-              </div>
-              
-              {/* Subtle glow on hover */}
-              <div className="absolute inset-0 opacity-0 hover:opacity-100 transition-opacity duration-500 pointer-events-none">
-                <div className="absolute inset-0 bg-gradient-to-r from-prism-electric-blue/5 to-transparent" />
+              {/* Author - minimal, just initials and role */}
+              <div className="flex items-center gap-3">
+                <span className="font-raw text-xs text-prism-muted uppercase tracking-badge">
+                  — {testimonial.name}, {testimonial.age}
+                </span>
               </div>
             </motion.div>
           ))}
@@ -77,12 +57,11 @@ export default function TestimonialsScreen({ screen }: TestimonialsScreenProps) 
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.8 }}
           onClick={() => goToNext()}
-          className="btn-primary px-12 py-4 text-lg hover:shadow-prism transition-shadow duration-300"
+          className="btn-primary"
         >
-          Join them
+          Continue
         </motion.button>
       </div>
     </FunnelLayout>
   );
 }
-

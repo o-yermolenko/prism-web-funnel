@@ -53,7 +53,7 @@ export default function EmailScreen({ screen }: EmailScreenProps) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-lg text-prism-muted-light mb-10"
+            className="text-lg text-prism-secondary mb-12"
           >
             {screen.subheader}
           </motion.p>
@@ -65,7 +65,7 @@ export default function EmailScreen({ screen }: EmailScreenProps) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
           onSubmit={handleSubmit}
-          className="space-y-6"
+          className="space-y-8"
         >
           <div className="relative">
             <input
@@ -75,37 +75,28 @@ export default function EmailScreen({ screen }: EmailScreenProps) {
               onFocus={() => setIsFocused(true)}
               onBlur={() => setIsFocused(false)}
               placeholder="your@email.com"
-              className={`w-full bg-transparent border-b-2 py-4 px-2 text-xl font-raw text-prism-white placeholder:text-prism-muted/50 outline-none transition-colors duration-300 ${
+              className={`w-full bg-transparent border-b py-4 px-0 text-xl font-raw text-prism-white placeholder:text-prism-muted outline-none transition-colors duration-300 ${
                 isFocused || email
                   ? isValid
                     ? 'border-prism-electric-blue'
                     : email
-                    ? 'border-prism-red/50'
-                    : 'border-prism-muted-light'
-                  : 'border-prism-muted/30'
+                    ? 'border-prism-muted'
+                    : 'border-prism-secondary'
+                  : 'border-prism-border'
               }`}
               autoComplete="email"
             />
             
-            {/* Validation indicator */}
-            {email && (
+            {/* Validation indicator - sharp square */}
+            {email && isValid && (
               <motion.div
                 initial={{ opacity: 0, scale: 0.5 }}
                 animate={{ opacity: 1, scale: 1 }}
-                className={`absolute right-2 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full flex items-center justify-center ${
-                  isValid ? 'bg-prism-electric-blue' : 'bg-prism-red/50'
-                }`}
+                className="absolute right-0 top-1/2 -translate-y-1/2 w-5 h-5 bg-prism-electric-blue flex items-center justify-center"
               >
-                {isValid ? (
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3">
-                    <polyline points="20 6 9 17 4 12" />
-                  </svg>
-                ) : (
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
-                    <line x1="18" y1="6" x2="6" y2="18" />
-                    <line x1="6" y1="6" x2="18" y2="18" />
-                  </svg>
-                )}
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
               </motion.div>
             )}
           </div>
@@ -115,8 +106,8 @@ export default function EmailScreen({ screen }: EmailScreenProps) {
             disabled={!isValid}
             className={`w-full py-4 text-lg font-refined transition-all duration-300 ${
               isValid
-                ? 'btn-primary hover:shadow-prism'
-                : 'bg-prism-muted/20 text-prism-muted cursor-not-allowed'
+                ? 'btn-primary'
+                : 'bg-transparent text-prism-muted cursor-not-allowed border border-prism-border'
             }`}
           >
             Enter the void
@@ -129,7 +120,7 @@ export default function EmailScreen({ screen }: EmailScreenProps) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.4 }}
-            className="mt-8 text-sm text-prism-muted"
+            className="mt-10 font-raw text-xs text-prism-muted tracking-badge uppercase"
           >
             {screen.content[0]}
           </motion.p>
