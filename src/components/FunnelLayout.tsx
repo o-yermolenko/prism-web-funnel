@@ -75,9 +75,9 @@ export default function FunnelLayout({
 
       {/* Main content */}
       <main className={`flex-1 flex flex-col items-center px-4 sm:px-6 pb-8 sm:pb-12 ${
-        showProgress ? 'pt-28 sm:pt-24' : 'pt-0'
-      } ${showProgress ? 'sm:justify-center' : ''}`}>
-        <div className="w-full flex flex-col items-center">
+        showProgress ? 'pt-28 sm:pt-24' : 'pt-16'
+      }`}>
+        <div className="w-full flex-1 flex flex-col items-center justify-center">
           {children}
         </div>
       </main>

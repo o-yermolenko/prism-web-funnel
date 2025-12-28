@@ -12,10 +12,51 @@ interface ValidationScreenProps {
 export default function ValidationScreen({ screen }: ValidationScreenProps) {
   const { goToNext } = useFunnelNavigation();
 
+  // Check if this is a simple validation (no statistics/diagnosis)
+  const isSimpleValidation = !screen.statistics && !screen.diagnosis;
+
   return (
     <FunnelLayout showProgress={screen.showProgress} showBackButton={screen.showBackButton}>
       <div className="w-full max-w-2xl mx-auto text-center px-4">
         
+        {/* Visual element for simple validations */}
+        {isSimpleValidation && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6 }}
+            className="mb-10"
+          >
+            <div className="relative w-24 h-24 mx-auto">
+              {/* Animated frequency bars */}
+              <div className="absolute inset-0 flex items-center justify-center gap-1">
+                {[...Array(5)].map((_, i) => (
+                  <motion.div
+                    key={i}
+                    className="w-1.5 bg-gradient-to-t from-prism-electric-blue to-prism-cyan"
+                    animate={{ 
+                      height: ['20%', `${40 + Math.random() * 50}%`, '20%'],
+                    }}
+                    transition={{ 
+                      duration: 1 + Math.random() * 0.5, 
+                      repeat: Infinity, 
+                      ease: "easeInOut",
+                      delay: i * 0.1 
+                    }}
+                    style={{ height: '20%' }}
+                  />
+                ))}
+              </div>
+              {/* Outer ring */}
+              <motion.div
+                className="absolute inset-0 border border-prism-electric-blue/30 rounded-full"
+                animate={{ rotate: 360 }}
+                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+              />
+            </div>
+          </motion.div>
+        )}
+
         {/* Statistics display */}
         {screen.statistics && (
           <motion.div
@@ -46,7 +87,7 @@ export default function ValidationScreen({ screen }: ValidationScreenProps) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.25 }}
-            className="text-lg md:text-xl text-prism-secondary mb-12 leading-relaxed"
+            className="text-lg md:text-xl text-prism-secondary mb-10 leading-relaxed max-w-md mx-auto"
           >
             {screen.subheader}
           </motion.p>
